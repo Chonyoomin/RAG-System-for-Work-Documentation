@@ -39,4 +39,7 @@ This repository contains only **synthetic, fictional, or fully redacted** sample
 
 ## Status
 
-Phase 0 — repository foundation only. No application logic implemented yet. See [docs/project-scope.md](docs/project-scope.md) for the phase plan.
+- **Phase 0 — Foundation.** Repository scaffolding, documentation, portfolio-safety guardrails, placeholder config.
+- **Phase 1 — Backend bootstrap.** FastAPI app, SQLAlchemy session layer, pgvector-ready DB initialization, and a `/health` endpoint with a lightweight DB connectivity check.
+
+No ingestion, OCR, indexing, retrieval, or answer generation yet. See [backend/README.md](backend/README.md) for run instructions and [docs/project-scope.md](docs/project-scope.md) for the phase plan.
