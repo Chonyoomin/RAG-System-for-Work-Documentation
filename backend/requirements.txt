@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+sqlalchemy
+psycopg[binary]
+pgvector
+llama-index
+langchain
+langchain-community
+pymupdf
+python-docx
+pillow
+pytesseract
+python-multipart

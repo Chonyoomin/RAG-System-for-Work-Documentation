@@ -1,0 +1,97 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# User uploads and any folders that may hold private documents
+uploads/
+data/uploads/
+data/private/
+data/raw/
+data/internal/
+data/customer/
+data/source_documents/
+
+# Derived artifacts from documents (must never be committed)
+ocr_output/
+processed/
+processed_output/
+extracted/
+chunks/
+cache/
+caches/
+.cache/
+tmp/
+temp/
+.tmp/
+*.cache
+
+# Vector store / index artifacts
+vector_store/
+vectors/
+indexes/
+index/
+*.index
+*.faiss
+*.ann
+*.duckdb
+
+# Logs
+logs/
+*.log
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+pgdata/
+postgres-data/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.venv/
+venv/
+env/
+build/
+dist/
+
+# Node / frontend
+node_modules/
+.next/
+.turbo/
+.parcel-cache/
+.vite/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Editors / OS
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Docker
+docker-compose.override.yml
