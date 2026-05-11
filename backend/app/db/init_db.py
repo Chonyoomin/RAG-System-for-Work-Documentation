@@ -1,5 +1,6 @@
 from sqlalchemy import text
 
+import app.models  # noqa: F401  -- ensure models register on Base.metadata
 from app.db.base import Base
 from app.db.session import engine
 
