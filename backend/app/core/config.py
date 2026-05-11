@@ -2,7 +2,10 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+<<<<<<< HEAD
 _BACKEND_DIR = Path(__file__).resolve().parents[2]
+=======
+>>>>>>> 8436c57 (Phase 2 initial)
 _REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
@@ -18,6 +21,7 @@ class Settings(BaseSettings):
 
     database_url: str = "postgresql+psycopg://postgres:postgres@localhost:5432/documentation_rag"
     embedding_model: str = "BAAI/bge-small-en-v1.5"
+    upload_dir: Path = _REPO_ROOT / "data" / "uploads"
 
 
 settings = Settings()
