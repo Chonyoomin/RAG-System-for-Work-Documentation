@@ -1,0 +1,654 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2939 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(POL-01 Document Retention and Redaction Policy) Tj
+0 -14 Td
+(Category: Policies) Tj
+0 -14 Td
+(Synthetic sample document for public portfolio review.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(DOCUMENT CONTROL) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Policy ID: POL-01-GOV-110) Tj
+0 -14 Td
+(Revision: Rev 1.0) Tj
+0 -14 Td
+(Owner: Operations Governance Office) Tj
+0 -14 Td
+(Audience: All employees, contractors, and project contributors) Tj
+0 -14 Td
+(Review Cycle: Every 12 months or after a control failure) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(POLICY STATEMENT) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This policy defines how fictional project teams store, review, redact, publish, and retire) Tj
+0 -14 Td
+(documents that may be used in a public-facing AI demonstration environment. Its purpose is to) Tj
+0 -14 Td
+(prevent accidental inclusion of private, identifying, or proprietary material while preserving) Tj
+0 -14 Td
+(enough structure for realistic testing.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(DEFINITIONS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Synthetic document: a file created entirely for demonstration or testing and not derived) Tj
+0 -14 Td
+(from private operational material.) Tj
+0 -14 Td
+(- Redacted document: a file whose sensitive content has been replaced with safe placeholders) Tj
+0 -14 Td
+(and reviewed for residual identifiers in text, metadata, and images.) Tj
+0 -14 Td
+(- Prohibited source: any real internal, customer, employee, vendor, or security-sensitive) Tj
+0 -14 Td
+(content that is not approved for unrestricted public release.) Tj
+0 -14 Td
+(- Derived artifact: OCR output, extracted text, embeddings, screenshots, logs, or caches) Tj
+0 -14 Td
+(produced from a prohibited source.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(REQUIREMENTS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Keep public repository sample data limited to synthetic or fully redacted content that a) Tj
+0 -14 Td
+(third party could inspect without restriction.) Tj
+0 -14 Td
+(- Store working drafts containing unresolved redactions only in a local excluded path until) Tj
+0 -14 Td
+(review is complete.) Tj
+0 -14 Td
+(- Review filenames, embedded metadata, document properties, and visible page content before) Tj
+0 -14 Td
+(any sample file is committed.) Tj
+0 -14 Td
+(- Retain synthetic demonstration documents as long as they support evaluation, examples, or) Tj
+0 -14 Td
+(user-interface testing, provided they remain current with the project scope.) Tj
+0 -14 Td
+(- Delete or replace sample documents that reference outdated controls, deprecated) Tj
+0 -14 Td
+(architectures, or naming patterns likely to confuse future reviewers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(PROHIBITED PRACTICES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Do not commit real manuals, internal screenshots, vendor exports, customer notes, OCR output) Tj
+0 -14 Td
+(from private files, or debug logs derived from private materials.) Tj
+0 -14 Td
+(- Do not rely on simple name replacement if the surrounding details still reveal a real site,) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 2262 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(incident, employee, or customer context.) Tj
+0 -14 Td
+(- Do not copy policy language from a private handbook into a public sample even if obvious) Tj
+0 -14 Td
+(identifiers are removed.) Tj
+0 -14 Td
+(- Do not treat generated embeddings, vector indexes, or extracted chunks from private sources) Tj
+0 -14 Td
+(as safe simply because the original file is absent from the repository.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(EXCEPTIONS AND ESCALATION) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- If a team believes a real document excerpt is necessary for demonstration, it must be) Tj
+0 -14 Td
+(escalated to the policy owner and replaced with a synthetic reconstruction unless explicit) Tj
+0 -14 Td
+(written release approval exists.) Tj
+0 -14 Td
+(- If uncertainty remains after review, treat the material as prohibited until a second) Tj
+0 -14 Td
+(reviewer signs off on its safety.) Tj
+0 -14 Td
+(- Exception approvals must name the approving role, scope of use, expiration date, and) Tj
+0 -14 Td
+(required follow-up controls.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(OVERSIGHT AND ENFORCEMENT) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Project maintainers should periodically sample the repository for unsafe artifacts,) Tj
+0 -14 Td
+(including PDF metadata, hidden spreadsheet tabs, OCR caches, and leftover local database) Tj
+0 -14 Td
+(files.) Tj
+0 -14 Td
+(- Violations require immediate removal from the branch, notification to the project owner, and) Tj
+0 -14 Td
+(a review of any downstream artifacts generated from the unsafe material.) Tj
+0 -14 Td
+(- Repeat violations should result in narrower contribution permissions until the contributor) Tj
+0 -14 Td
+(demonstrates understanding of the public-release boundary.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(IMPLEMENTATION NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Teams implementing this policy should translate the requirements into checklists, approval) Tj
+0 -14 Td
+(forms, and repository controls that are easy to audit. Local convenience does not override) Tj
+0 -14 Td
+(documented retention, redaction, or access requirements.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Where two rules appear to conflict, the stricter public-release rule governs until the policy) Tj
+0 -14 Td
+(owner publishes a written exception or clarifying revision.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 1403 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(POL-01 Document Retention and Redaction Policy - Appendix 1) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 1: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 1403 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(POL-01 Document Retention and Redaction Policy - Appendix 2) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 2: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 1403 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(POL-01 Document Retention and Redaction Policy - Appendix 3) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 3: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 1403 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(POL-01 Document Retention and Redaction Policy - Appendix 4) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 4: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 1403 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(POL-01 Document Retention and Redaction Policy - Appendix 5) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 5: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 1403 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(POL-01 Document Retention and Redaction Policy - Appendix 6) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 6: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Length 1403 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(POL-01 Document Retention and Redaction Policy - Appendix 7) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 7: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Length 1403 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(POL-01 Document Retention and Redaction Policy - Appendix 8) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 8: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Pages /Kids [13 0 R 14 0 R 15 0 R 16 0 R 17 0 R 18 0 R 19 0 R 20 0 R 21 0 R 22 0 R] /Count 10 >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+15 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+16 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+17 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+18 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 7 0 R >>
+endobj
+19 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+20 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 9 0 R >>
+endobj
+21 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+22 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 11 0 R >>
+endobj
+23 0 obj
+<< /Type /Catalog /Pages 12 0 R >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000003076 00000 n 
+0000005390 00000 n 
+0000006845 00000 n 
+0000008300 00000 n 
+0000009755 00000 n 
+0000011210 00000 n 
+0000012665 00000 n 
+0000014120 00000 n 
+0000015576 00000 n 
+0000017032 00000 n 
+0000017155 00000 n 
+0000017283 00000 n 
+0000017411 00000 n 
+0000017539 00000 n 
+0000017667 00000 n 
+0000017795 00000 n 
+0000017923 00000 n 
+0000018051 00000 n 
+0000018179 00000 n 
+0000018308 00000 n 
+0000018437 00000 n 
+trailer
+<< /Size 24 /Root 23 0 R >>
+startxref
+18488
+%%EOF

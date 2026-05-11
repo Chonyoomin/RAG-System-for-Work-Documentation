@@ -1,8 +1,17 @@
+from pathlib import Path
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+_BACKEND_DIR = Path(__file__).resolve().parents[2]
+_REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore", case_sensitive=False)
+    model_config = SettingsConfigDict(
+        env_file=(_REPO_ROOT / ".env", _BACKEND_DIR / ".env"),
+        extra="ignore",
+        case_sensitive=False,
+    )
 
     app_name: str = "Documentation RAG"
     app_version: str = "0.1.0"

@@ -1,0 +1,678 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2618 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-01 Conveyor Belt Preventive Maintenance) Tj
+0 -14 Td
+(Category: Maintenance Procedures) Tj
+0 -14 Td
+(Synthetic sample document for public portfolio review.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(DOCUMENT CONTROL) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Document ID: MP-01-CNV-220) Tj
+0 -14 Td
+(Revision: Rev 1.0) Tj
+0 -14 Td
+(Owner: Facilities Reliability Team) Tj
+0 -14 Td
+(Applies To: North Campus Distribution Operations) Tj
+0 -14 Td
+(Review Cycle: Every 12 months or after equipment redesign) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(PURPOSE) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This procedure defines the monthly preventive maintenance routine for the fictional CNV-220) Tj
+0 -14 Td
+(takeaway conveyor used in the packing mezzanine. The goal is to catch belt tracking drift,) Tj
+0 -14 Td
+(worn rollers, loose guards, and overheating drive components before they interrupt outbound) Tj
+0 -14 Td
+(volume.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(The procedure is intended for trained maintenance technicians and shift leads. Production) Tj
+0 -14 Td
+(operators may assist with observation and restart confirmation, but they do not perform) Tj
+0 -14 Td
+(isolated service work unless the task card explicitly allows it.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(REQUIRED TOOLS AND PARTS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Lockout kit with personal lock, hasp, and danger tag.) Tj
+0 -14 Td
+(- Infrared thermometer, 6 mm hex key set, belt tension gauge, flashlight, clean lint-free) Tj
+0 -14 Td
+(cloths.) Tj
+0 -14 Td
+(- Approved replacement hardware for side guards, nose pulley fasteners, and three standard) Tj
+0 -14 Td
+(return rollers.) Tj
+0 -14 Td
+(- Work order printout or digital task card showing the exact conveyor zone and last completed) Tj
+0 -14 Td
+(service date.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(HAZARDS AND CONTROLS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Treat the conveyor as energized until lockout is verified at the local disconnect and start) Tj
+0 -14 Td
+(button.) Tj
+0 -14 Td
+(- Keep both side guards installed unless a specific inspection step calls for temporary) Tj
+0 -14 Td
+(removal and reinstall them before manual jogging.) Tj
+0 -14 Td
+(- Do not place hands between the belt and roller bed while checking tracking; use a marked) Tj
+0 -14 Td
+(reference point and observe from the frame edge.) Tj
+0 -14 Td
+(- If product debris contains broken glass, use cut-resistant gloves and dispose of waste in) Tj
+0 -14 Td
+(the designated rigid container.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(PREPARATION) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Confirm the service window with the area lead and post a maintenance in progress sign at) Tj
+0 -14 Td
+(both feeder points.) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 3188 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(- Stop the conveyor from the local HMI, isolate the disconnect, apply personal lockout, and) Tj
+0 -14 Td
+(test the start station for zero response.) Tj
+0 -14 Td
+(- Walk the full conveyor length and inspect belt edges, splice condition, side guides, frame) Tj
+0 -14 Td
+(welds, and return roller rotation.) Tj
+0 -14 Td
+(- Clean the nose pulley, tail pulley, photo-eye brackets, and debris traps. Note any product) Tj
+0 -14 Td
+(residue that could change tracking or sensor performance.) Tj
+0 -14 Td
+(- Measure motor surface temperature and gearbox housing temperature before adjustment. Compare) Tj
+0 -14 Td
+(readings to the baseline values in the task card.) Tj
+0 -14 Td
+(- Check belt tracking by hand-jogging only after all guards are temporarily reinstalled and) Tj
+0 -14 Td
+(the area is clear. If the belt drifts more than 5 mm at either edge, adjust the tail tracking) Tj
+0 -14 Td
+(bolts in quarter-turn increments.) Tj
+0 -14 Td
+(- Verify roller condition by spinning each return roller. Replace any roller that binds,) Tj
+0 -14 Td
+(chatters, or has visible flat spots.) Tj
+0 -14 Td
+(- Re-tension the belt only if the gauge reading falls outside the approved operating band of) Tj
+0 -14 Td
+(32 to 36 units.) Tj
+0 -14 Td
+(- Restore the system, remove lockout, run the conveyor empty for three minutes, then run ten) Tj
+0 -14 Td
+(sample cartons through the full path.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(PROCEDURE) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Belt tracks within 5 mm of centerline at empty and loaded conditions.) Tj
+0 -14 Td
+(- No exposed hardware, missing guards, or loose brackets remain after service.) Tj
+0 -14 Td
+(- Motor and gearbox temperatures are stable and do not exceed the prior baseline by more than) Tj
+0 -14 Td
+(8 C.) Tj
+0 -14 Td
+(- Ten sample cartons pass without skewing, snagging, or photo-eye interruption faults.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(ACCEPTANCE CRITERIA) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record as-found and as-left belt tension readings in the work order.) Tj
+0 -14 Td
+(- List every adjusted component, replaced roller, and reused spare part by quantity.) Tj
+0 -14 Td
+(- If a defect is deferred, create a follow-up corrective work order and note the risk to) Tj
+0 -14 Td
+(throughput.) Tj
+0 -14 Td
+(- Obtain shift lead sign-off after the loaded restart test is complete.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(RECORDS AND CLOSEOUT) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- A common failure pattern on this fictional conveyor is gradual drift toward the operator) Tj
+0 -14 Td
+(side after two weeks of heavy carton volume. In past simulations, the root cause was usually) Tj
+0 -14 Td
+(tail roller contamination rather than major frame damage.) Tj
+0 -14 Td
+(- Technicians should avoid overcorrecting tracking with large bolt turns. Small adjustments) Tj
+0 -14 Td
+(followed by an empty run and a loaded run give more repeatable results and make later) Tj
+0 -14 Td
+(troubleshooting easier.) Tj
+0 -14 Td
+(- When reviewing the service log, compare temperature data by season. Ambient heat on the) Tj
+0 -14 Td
+(mezzanine can raise baseline readings in summer without indicating a drive failure.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(EXAMPLES AND NOTES) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-01 Conveyor Belt Preventive Maintenance - Appendix 1) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 1: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-01 Conveyor Belt Preventive Maintenance - Appendix 2) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 2: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-01 Conveyor Belt Preventive Maintenance - Appendix 3) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 3: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-01 Conveyor Belt Preventive Maintenance - Appendix 4) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 4: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-01 Conveyor Belt Preventive Maintenance - Appendix 5) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 5: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-01 Conveyor Belt Preventive Maintenance - Appendix 6) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 6: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-01 Conveyor Belt Preventive Maintenance - Appendix 7) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 7: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-01 Conveyor Belt Preventive Maintenance - Appendix 8) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 8: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Pages /Kids [13 0 R 14 0 R 15 0 R 16 0 R 17 0 R 18 0 R 19 0 R 20 0 R 21 0 R 22 0 R] /Count 10 >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+15 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+16 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+17 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+18 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 7 0 R >>
+endobj
+19 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+20 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 9 0 R >>
+endobj
+21 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+22 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 11 0 R >>
+endobj
+23 0 obj
+<< /Type /Catalog /Pages 12 0 R >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000002755 00000 n 
+0000005995 00000 n 
+0000007446 00000 n 
+0000008897 00000 n 
+0000010348 00000 n 
+0000011799 00000 n 
+0000013250 00000 n 
+0000014701 00000 n 
+0000016153 00000 n 
+0000017605 00000 n 
+0000017728 00000 n 
+0000017856 00000 n 
+0000017984 00000 n 
+0000018112 00000 n 
+0000018240 00000 n 
+0000018368 00000 n 
+0000018496 00000 n 
+0000018624 00000 n 
+0000018752 00000 n 
+0000018881 00000 n 
+0000019010 00000 n 
+trailer
+<< /Size 24 /Root 23 0 R >>
+startxref
+19061
+%%EOF

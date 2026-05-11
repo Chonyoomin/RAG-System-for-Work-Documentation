@@ -1,0 +1,658 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2712 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-03 HVAC Filter and Airflow Service Manual) Tj
+0 -14 Td
+(Category: Maintenance Procedures) Tj
+0 -14 Td
+(Synthetic sample document for public portfolio review.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(DOCUMENT CONTROL) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Document ID: MP-03-HVAC-RTU7) Tj
+0 -14 Td
+(Revision: Rev 1.0) Tj
+0 -14 Td
+(Owner: Facilities Reliability Team) Tj
+0 -14 Td
+(Applies To: North Campus Distribution Operations) Tj
+0 -14 Td
+(Review Cycle: Every 12 months or after equipment redesign) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(PURPOSE) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This manual defines the quarterly service routine for the fictional RTU-7 rooftop HVAC unit) Tj
+0 -14 Td
+(serving office and staging areas. It covers filter replacement, condensate inspection, belt) Tj
+0 -14 Td
+(condition, airflow verification, and restart documentation.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(The procedure is intended for trained maintenance technicians and shift leads. Production) Tj
+0 -14 Td
+(operators may assist with observation and restart confirmation, but they do not perform) Tj
+0 -14 Td
+(isolated service work unless the task card explicitly allows it.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(REQUIRED TOOLS AND PARTS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Roof access permit, multimeter, differential pressure gauge, spare filters, belt tension) Tj
+0 -14 Td
+(tool, flashlight, and hand brush.) Tj
+0 -14 Td
+(- Approved replacement filters with the exact MERV rating listed on the asset card.) Tj
+0 -14 Td
+(- Portable radio or phone for contact with the building coordinator during shutdown and) Tj
+0 -14 Td
+(restart.) Tj
+0 -14 Td
+(- Weather-appropriate fall protection and non-slip footwear for roof access.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(HAZARDS AND CONTROLS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Do not access the roof during lightning, freezing precipitation, or sustained high wind) Tj
+0 -14 Td
+(conditions.) Tj
+0 -14 Td
+(- Use the local disconnect to isolate the unit before opening service panels.) Tj
+0 -14 Td
+(- Take care around hot surfaces near compressor lines and sharp cabinet edges inside filter) Tj
+0 -14 Td
+(and blower compartments.) Tj
+0 -14 Td
+(- If standing water is present near electrical sections, stop work and escalate before) Tj
+0 -14 Td
+(energizing the unit.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(PREPARATION) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Coordinate a service window with the building coordinator so occupants understand the) Tj
+0 -14 Td
+(temporary shutdown.) Tj
+0 -14 Td
+(- Isolate the RTU, verify fan stop, and inspect exterior panel condition, seals, and visible) Tj
+0 -14 Td
+(fasteners before opening the cabinet.) Tj
+0 -14 Td
+(- Remove used filters, compare size and rating to the asset card, and install matched) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 2400 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(replacements with airflow arrows oriented correctly.) Tj
+0 -14 Td
+(- Inspect blower belt wear, pulley alignment, condensate drain condition, and coil face) Tj
+0 -14 Td
+(cleanliness. Brush away loose debris without bending fins.) Tj
+0 -14 Td
+(- Measure differential pressure across the new filters after restart and compare it with the) Tj
+0 -14 Td
+(acceptable post-service band on the asset card.) Tj
+0 -14 Td
+(- Check supply and return temperature difference after the unit stabilizes for ten minutes.) Tj
+0 -14 Td
+(- Confirm all access panels are secured and that no tools or packaging remain inside the) Tj
+0 -14 Td
+(cabinet before final restart.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(PROCEDURE) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Installed filters match size and MERV requirement with no bypass gaps.) Tj
+0 -14 Td
+(- Condensate path is clear and no standing water remains in the drain pan.) Tj
+0 -14 Td
+(- Belt tension is within the approved range and no abnormal vibration or squeal is present) Tj
+0 -14 Td
+(after restart.) Tj
+0 -14 Td
+(- Measured temperature split and filter differential pressure are within the unit baseline or) Tj
+0 -14 Td
+(have a documented reason for variance.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(ACCEPTANCE CRITERIA) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record filter size, quantity, and lot placeholder used during service.) Tj
+0 -14 Td
+(- Capture ambient outdoor temperature and supply-return delta at the time of final readings.) Tj
+0 -14 Td
+(- List any deferred roof or cabinet repairs separately from the routine filter task.) Tj
+0 -14 Td
+(- Attach photos only if the project later introduces media support; for Phase 1 and Phase 2) Tj
+0 -14 Td
+(planning, note conditions in text.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(RECORDS AND CLOSEOUT) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- A realistic retrieval question for this manual would ask whether the temperature split is) Tj
+0 -14 Td
+(taken immediately after restart or after a stabilization period. The answer appears in the) Tj
+0 -14 Td
+(procedure steps and not in the acceptance criteria, which helps test precise grounding.) Tj
+0 -14 Td
+(- Another useful scenario involves the wrong filter rating arriving from stores. The manual) Tj
+0 -14 Td
+(implies the unit should not be closed out with a mismatched filter, even if airflow appears) Tj
+0 -14 Td
+(normal.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(EXAMPLES AND NOTES) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-03 HVAC Filter and Airflow Service Manual - Appendix 1) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 1: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-03 HVAC Filter and Airflow Service Manual - Appendix 2) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 2: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-03 HVAC Filter and Airflow Service Manual - Appendix 3) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 3: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-03 HVAC Filter and Airflow Service Manual - Appendix 4) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 4: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-03 HVAC Filter and Airflow Service Manual - Appendix 5) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 5: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-03 HVAC Filter and Airflow Service Manual - Appendix 6) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 6: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-03 HVAC Filter and Airflow Service Manual - Appendix 7) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 7: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-03 HVAC Filter and Airflow Service Manual - Appendix 8) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 8: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Pages /Kids [13 0 R 14 0 R 15 0 R 16 0 R 17 0 R 18 0 R 19 0 R 20 0 R 21 0 R 22 0 R] /Count 10 >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+15 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+16 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+17 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+18 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 7 0 R >>
+endobj
+19 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+20 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 9 0 R >>
+endobj
+21 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+22 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 11 0 R >>
+endobj
+23 0 obj
+<< /Type /Catalog /Pages 12 0 R >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000002849 00000 n 
+0000005301 00000 n 
+0000006754 00000 n 
+0000008207 00000 n 
+0000009660 00000 n 
+0000011113 00000 n 
+0000012566 00000 n 
+0000014019 00000 n 
+0000015473 00000 n 
+0000016927 00000 n 
+0000017050 00000 n 
+0000017178 00000 n 
+0000017306 00000 n 
+0000017434 00000 n 
+0000017562 00000 n 
+0000017690 00000 n 
+0000017818 00000 n 
+0000017946 00000 n 
+0000018074 00000 n 
+0000018203 00000 n 
+0000018332 00000 n 
+trailer
+<< /Size 24 /Root 23 0 R >>
+startxref
+18383
+%%EOF
