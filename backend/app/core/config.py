@@ -2,10 +2,7 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-<<<<<<< HEAD
 _BACKEND_DIR = Path(__file__).resolve().parents[2]
-=======
->>>>>>> 8436c57 (Phase 2 initial)
 _REPO_ROOT = Path(__file__).resolve().parents[3]
 
 

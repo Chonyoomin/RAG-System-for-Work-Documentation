@@ -1,14 +1,17 @@
-from sqlalchemy import text
+from pathlib import Path
 
-import app.models  # noqa: F401  -- ensure models register on Base.metadata
-from app.db.base import Base
-from app.db.session import engine
+from alembic import command
+from alembic.config import Config
 
 
 def init_db() -> None:
-    with engine.begin() as conn:
-        conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
-    Base.metadata.create_all(bind=engine)
+    backend_dir = Path(__file__).resolve().parents[2]
+    alembic_ini = backend_dir / "alembic.ini"
+
+    config = Config(str(alembic_ini))
+    config.set_main_option("script_location", str(backend_dir / "migrations"))
+
+    command.upgrade(config, "head")
 
 
 if __name__ == "__main__":
