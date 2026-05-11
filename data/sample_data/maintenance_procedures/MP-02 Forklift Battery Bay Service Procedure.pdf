@@ -1,0 +1,674 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2677 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-02 Forklift Battery Bay Service Procedure) Tj
+0 -14 Td
+(Category: Maintenance Procedures) Tj
+0 -14 Td
+(Synthetic sample document for public portfolio review.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(DOCUMENT CONTROL) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Document ID: MP-02-FLT-E18) Tj
+0 -14 Td
+(Revision: Rev 1.0) Tj
+0 -14 Td
+(Owner: Facilities Reliability Team) Tj
+0 -14 Td
+(Applies To: North Campus Distribution Operations) Tj
+0 -14 Td
+(Review Cycle: Every 12 months or after equipment redesign) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(PURPOSE) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This procedure covers weekly inspection and light service of the fictional E18 electric) Tj
+0 -14 Td
+(forklift battery bay. It focuses on cable condition, connector heat, hold-down hardware,) Tj
+0 -14 Td
+(residue cleanup, and ventilation path integrity.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(The procedure is intended for trained maintenance technicians and shift leads. Production) Tj
+0 -14 Td
+(operators may assist with observation and restart confirmation, but they do not perform) Tj
+0 -14 Td
+(isolated service work unless the task card explicitly allows it.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(REQUIRED TOOLS AND PARTS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Insulated hand tools, terminal brush, neutral cleaning solution, absorbent pads, inspection) Tj
+0 -14 Td
+(mirror, and torque wrench.) Tj
+0 -14 Td
+(- Replacement vent caps, cable ties rated for battery compartments, and approved dielectric) Tj
+0 -14 Td
+(grease.) Tj
+0 -14 Td
+(- Acid-resistant gloves, face shield, splash apron, and battery service checklist.) Tj
+0 -14 Td
+(- Portable fan for added airflow during extended inspection if the charging area is warm or) Tj
+0 -14 Td
+(enclosed.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(HAZARDS AND CONTROLS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Wear acid-resistant PPE before opening the bay, even if no leak is visible.) Tj
+0 -14 Td
+(- Do not place metal tools on the battery top or bridge positive and negative terminals with a) Tj
+0 -14 Td
+(loose part or rag.) Tj
+0 -14 Td
+(- If swelling, cracked cases, or strong sulfur odor are present, stop work and escalate to the) Tj
+0 -14 Td
+(fleet supervisor immediately.) Tj
+0 -14 Td
+(- Use neutral cleaner only on approved surfaces and keep liquids away from control modules) Tj
+0 -14 Td
+(mounted above the battery tray.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(PREPARATION) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Park the truck in the designated service lane, key off, chock the wheels, and confirm no) Tj
+0 -14 Td
+(active charging cable is attached.) Tj
+0 -14 Td
+(- Open the battery bay and inspect hold-downs, tray rails, cable strain relief, and vent cap) Tj
+0 -14 Td
+(seating before touching residue.) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 3012 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(- Check for heat discoloration at the main connector and contactor leads. If discoloration is) Tj
+0 -14 Td
+(present, record the exact location and stop before reconnecting the truck for service.) Tj
+0 -14 Td
+(- Brush away dry residue first, then clean surfaces with neutral solution and absorbent pads.) Tj
+0 -14 Td
+(Do not flood the compartment.) Tj
+0 -14 Td
+(- Torque accessible hold-down hardware to the approved value on the checklist and replace) Tj
+0 -14 Td
+(missing cable ties or clips.) Tj
+0 -14 Td
+(- Verify that vent caps are seated evenly and that no cable is routed across a vent opening or) Tj
+0 -14 Td
+(sharp tray edge.) Tj
+0 -14 Td
+(- Apply a light film of dielectric grease only to approved connector surfaces, not to exposed) Tj
+0 -14 Td
+(cell tops or inspection labels.) Tj
+0 -14 Td
+(- Close the bay, power the truck, and confirm the unit starts without connector fault, battery) Tj
+0 -14 Td
+(disconnect warning, or lift inhibit message.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(PROCEDURE) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- No loose hardware, visible corrosion residue, or cable abrasion remains inside the battery) Tj
+0 -14 Td
+(bay.) Tj
+0 -14 Td
+(- Main connector housing shows no fresh heat marks or burnt odor after restart.) Tj
+0 -14 Td
+(- The truck powers up cleanly and completes a short drive, lift, and lower functional check.) Tj
+0 -14 Td
+(- The service checklist and any defect notes are attached to the fleet maintenance record) Tj
+0 -14 Td
+(before the truck returns to operation.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(ACCEPTANCE CRITERIA) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Capture battery serial placeholder, truck ID, shift, and technician initials.) Tj
+0 -14 Td
+(- If corrosion was cleaned, note the severity as light, moderate, or heavy and whether follow-) Tj
+0 -14 Td
+(up inspection is required.) Tj
+0 -14 Td
+(- Open a corrective action ticket for any connector heat event, cracked vent cap, or damaged) Tj
+0 -14 Td
+(tray liner.) Tj
+0 -14 Td
+(- Log the restart result and the name of the supervisor who approved the truck for release.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(RECORDS AND CLOSEOUT) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- The most realistic training scenario for this guide is a truck that still starts normally) Tj
+0 -14 Td
+(but shows early connector discoloration near the charge lead. That creates a retrieval target) Tj
+0 -14 Td
+(for questions about when a forklift may continue in limited service and when it must be pulled) Tj
+0 -14 Td
+(immediately.) Tj
+0 -14 Td
+(- Another frequent scenario is repeated residue near one corner of the tray caused by poor cap) Tj
+0 -14 Td
+(seating after charging. The procedure should lead a reader to inspect vent cap fit before) Tj
+0 -14 Td
+(assuming a larger battery defect.) Tj
+0 -14 Td
+(- Because this is a public-safe sample, all identifiers are fictional and all maintenance) Tj
+0 -14 Td
+(outcomes are written as examples rather than statements about a real fleet.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(EXAMPLES AND NOTES) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-02 Forklift Battery Bay Service Procedure - Appendix 1) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 1: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-02 Forklift Battery Bay Service Procedure - Appendix 2) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 2: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-02 Forklift Battery Bay Service Procedure - Appendix 3) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 3: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-02 Forklift Battery Bay Service Procedure - Appendix 4) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 4: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-02 Forklift Battery Bay Service Procedure - Appendix 5) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 5: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-02 Forklift Battery Bay Service Procedure - Appendix 6) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 6: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-02 Forklift Battery Bay Service Procedure - Appendix 7) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 7: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(MP-02 Forklift Battery Bay Service Procedure - Appendix 8) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 8: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Pages /Kids [13 0 R 14 0 R 15 0 R 16 0 R 17 0 R 18 0 R 19 0 R 20 0 R 21 0 R 22 0 R] /Count 10 >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+15 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+16 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+17 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+18 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 7 0 R >>
+endobj
+19 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+20 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 9 0 R >>
+endobj
+21 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+22 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 11 0 R >>
+endobj
+23 0 obj
+<< /Type /Catalog /Pages 12 0 R >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000002814 00000 n 
+0000005878 00000 n 
+0000007331 00000 n 
+0000008784 00000 n 
+0000010237 00000 n 
+0000011690 00000 n 
+0000013143 00000 n 
+0000014596 00000 n 
+0000016050 00000 n 
+0000017504 00000 n 
+0000017627 00000 n 
+0000017755 00000 n 
+0000017883 00000 n 
+0000018011 00000 n 
+0000018139 00000 n 
+0000018267 00000 n 
+0000018395 00000 n 
+0000018523 00000 n 
+0000018651 00000 n 
+0000018780 00000 n 
+0000018909 00000 n 
+trailer
+<< /Size 24 /Root 23 0 R >>
+startxref
+18960
+%%EOF

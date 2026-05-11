@@ -1,0 +1,646 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2743 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-02 Warehouse Scanner Sync Failure Guide) Tj
+0 -14 Td
+(Category: Troubleshooting Guides) Tj
+0 -14 Td
+(Synthetic sample document for public portfolio review.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(DOCUMENT CONTROL) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Guide ID: TS-02-SCN-512) Tj
+0 -14 Td
+(Revision: Rev 1.0) Tj
+0 -14 Td
+(Owner: Service Desk and Site Support) Tj
+0 -14 Td
+(Use Case: Frontline diagnosis before depot repair or infrastructure escalation) Tj
+0 -14 Td
+(Review Cycle: Every 6 months or after repeat incidents) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(OVERVIEW) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This guide covers the fictional SCN-512 warehouse scanner when completed picks, moves, or) Tj
+0 -14 Td
+(counts do not sync promptly to the host system. It focuses on the difference between local) Tj
+0 -14 Td
+(device issues, wireless coverage problems, and backlog on the application side.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(COMMON SYMPTOMS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Scanner shows completed work locally but the supervisor dashboard still displays the old) Tj
+0 -14 Td
+(queue state after several minutes.) Tj
+0 -14 Td
+(- Users see a sync-pending banner that clears and returns repeatedly without a hard error) Tj
+0 -14 Td
+(message.) Tj
+0 -14 Td
+(- Scanner reconnects to Wi-Fi after roaming but does not upload queued work until the app is) Tj
+0 -14 Td
+(restarted.) Tj
+0 -14 Td
+(- Multiple devices in one aisle report stale inventory positions after a wireless access point) Tj
+0 -14 Td
+(switchover.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(LIKELY CAUSES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Weak or unstable wireless coverage causing repeated partial reconnects.) Tj
+0 -14 Td
+(- Clock drift or stale authentication token after the device resumes from a long dock period.) Tj
+0 -14 Td
+(- Application queue backlog on the local device caused by a stuck job record.) Tj
+0 -14 Td
+(- Server-side processing delay affecting multiple scanners at once.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(DIAGNOSTIC WORKFLOW) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Check whether the problem is isolated to one scanner, one aisle, or an entire shift crew) Tj
+0 -14 Td
+(before making device-level changes.) Tj
+0 -14 Td
+(- Confirm Wi-Fi signal and roaming history on the device diagnostics page. Note whether) Tj
+0 -14 Td
+(reconnects occurred during the affected window.) Tj
+0 -14 Td
+(- Open the sync queue screen and look for one item that remains in retry longer than the) Tj
+0 -14 Td
+(others.) Tj
+0 -14 Td
+(- Verify device time, battery state, and token age if the unit has been docked for an extended) Tj
+0 -14 Td
+(period.) Tj
+0 -14 Td
+(- If multiple devices are affected, compare the observed time with any known network or) Tj
+0 -14 Td
+(application maintenance notice before clearing queues.) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 1913 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+() Tj
+0 -14 Td
+(RECOVERY ACTIONS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- If one stuck record blocks the queue, export the error summary, capture the job ID, and) Tj
+0 -14 Td
+(clear only the failed record according to the device support workflow.) Tj
+0 -14 Td
+(- If the token is stale, sign the user out, reconnect Wi-Fi, and sign back in before rerunning) Tj
+0 -14 Td
+(sync.) Tj
+0 -14 Td
+(- If roaming instability is evident, move to a known-good coverage area and confirm whether) Tj
+0 -14 Td
+(queued work uploads without restarting the app.) Tj
+0 -14 Td
+(- If the issue follows one device across areas, re-enroll the scanner profile and retest with) Tj
+0 -14 Td
+(a single sample transaction.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(ESCALATION CRITERIA) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Escalate to network support if multiple scanners in the same zone show reconnect churn or) Tj
+0 -14 Td
+(low signal history during the same time period.) Tj
+0 -14 Td
+(- Escalate to the application support team if multiple devices have healthy connectivity but) Tj
+0 -14 Td
+(their queues remain blocked by different records.) Tj
+0 -14 Td
+(- Escalate immediately if clearing the queue risks losing unposted inventory movements and no) Tj
+0 -14 Td
+(audit export is available.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(FIELD NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This guide intentionally distinguishes between a single stuck queue record and a broad outage) Tj
+0 -14 Td
+(because those produce different evidence. That makes it a stronger corpus document for later) Tj
+0 -14 Td
+(retrieval than a simple one-size-fits-all checklist.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(A realistic user question might ask whether a scanner should be re-enrolled before or after) Tj
+0 -14 Td
+(checking whether the problem affects multiple devices. The guide says scope first, then re-) Tj
+0 -14 Td
+(enroll only if the issue follows one device.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-02 Warehouse Scanner Sync Failure Guide - Appendix 1) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 1: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-02 Warehouse Scanner Sync Failure Guide - Appendix 2) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 2: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-02 Warehouse Scanner Sync Failure Guide - Appendix 3) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 3: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-02 Warehouse Scanner Sync Failure Guide - Appendix 4) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 4: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-02 Warehouse Scanner Sync Failure Guide - Appendix 5) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 5: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-02 Warehouse Scanner Sync Failure Guide - Appendix 6) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 6: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-02 Warehouse Scanner Sync Failure Guide - Appendix 7) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 7: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Length 1399 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-02 Warehouse Scanner Sync Failure Guide - Appendix 8) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 8: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Pages /Kids [13 0 R 14 0 R 15 0 R 16 0 R 17 0 R 18 0 R 19 0 R 20 0 R 21 0 R 22 0 R] /Count 10 >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+15 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+16 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+17 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+18 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 7 0 R >>
+endobj
+19 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+20 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 9 0 R >>
+endobj
+21 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+22 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 11 0 R >>
+endobj
+23 0 obj
+<< /Type /Catalog /Pages 12 0 R >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000002880 00000 n 
+0000004845 00000 n 
+0000006296 00000 n 
+0000007747 00000 n 
+0000009198 00000 n 
+0000010649 00000 n 
+0000012100 00000 n 
+0000013551 00000 n 
+0000015003 00000 n 
+0000016455 00000 n 
+0000016578 00000 n 
+0000016706 00000 n 
+0000016834 00000 n 
+0000016962 00000 n 
+0000017090 00000 n 
+0000017218 00000 n 
+0000017346 00000 n 
+0000017474 00000 n 
+0000017602 00000 n 
+0000017731 00000 n 
+0000017860 00000 n 
+trailer
+<< /Size 24 /Root 23 0 R >>
+startxref
+17911
+%%EOF

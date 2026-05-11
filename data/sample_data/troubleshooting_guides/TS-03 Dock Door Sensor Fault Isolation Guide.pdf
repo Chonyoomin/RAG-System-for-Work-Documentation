@@ -1,0 +1,634 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2668 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-03 Dock Door Sensor Fault Isolation Guide) Tj
+0 -14 Td
+(Category: Troubleshooting Guides) Tj
+0 -14 Td
+(Synthetic sample document for public portfolio review.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(DOCUMENT CONTROL) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Guide ID: TS-03-DDR-330) Tj
+0 -14 Td
+(Revision: Rev 1.0) Tj
+0 -14 Td
+(Owner: Service Desk and Site Support) Tj
+0 -14 Td
+(Use Case: Frontline diagnosis before depot repair or infrastructure escalation) Tj
+0 -14 Td
+(Review Cycle: Every 6 months or after repeat incidents) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(OVERVIEW) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This guide supports first-response diagnosis of fictional dock door photo-eye faults, false) Tj
+0 -14 Td
+(obstruction alarms, and intermittent beam-loss events. It is intended for site support,) Tj
+0 -14 Td
+(maintenance leads, and supervisors deciding whether a door can remain in limited service.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(COMMON SYMPTOMS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Door reverses immediately after closing even though the opening is clear.) Tj
+0 -14 Td
+(- Controller panel shows intermittent obstruction or beam-loss alarms that clear without) Tj
+0 -14 Td
+(manual reset.) Tj
+0 -14 Td
+(- Fault appears during sunrise or late-day glare on one door orientation only.) Tj
+0 -14 Td
+(- Door closes normally in manual hold-to-run mode but faults in automatic mode.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(LIKELY CAUSES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Dirty or misaligned photo-eye lenses.) Tj
+0 -14 Td
+(- Cable strain or intermittent break near the moving side of the frame.) Tj
+0 -14 Td
+(- Sun glare or reflective shrink wrap causing false sensor readings.) Tj
+0 -14 Td
+(- Controller input instability or failing sensor power supply.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(DIAGNOSTIC WORKFLOW) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Secure the lane and confirm no trailer movement, pedestrian activity, or forklift traffic) Tj
+0 -14 Td
+(will intersect the door while testing is in progress.) Tj
+0 -14 Td
+(- Inspect both lenses, brackets, and cable routing. Clean lenses before changing alignment.) Tj
+0 -14 Td
+(- Observe controller input lights while gently moving the cable near the travel point to) Tj
+0 -14 Td
+(identify intermittent breaks.) Tj
+0 -14 Td
+(- Test the door in manual mode and automatic mode to separate a control logic issue from a) Tj
+0 -14 Td
+(basic obstruction reading.) Tj
+0 -14 Td
+(- If glare is suspected, shade the receiver temporarily and note whether the fault clears) Tj
+0 -14 Td
+(under the same operating cycle.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(RECOVERY ACTIONS) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Realign brackets and retighten hardware if the beam path has shifted.) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 1543 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(- Replace damaged cable sections or sensor heads if intermittent input changes are confirmed.) Tj
+0 -14 Td
+(- Apply the approved glare shield or timing change only if the glare condition is documented) Tj
+0 -14 Td
+(and recurring on that door orientation.) Tj
+0 -14 Td
+(- If the controller input remains unstable after sensor replacement, place the door out of) Tj
+0 -14 Td
+(service and escalate to controls support.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(ESCALATION CRITERIA) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Escalate immediately if the door cannot be operated safely in either manual or automatic) Tj
+0 -14 Td
+(mode.) Tj
+0 -14 Td
+(- Escalate to controls support if input lights disagree with physical sensor state after lens) Tj
+0 -14 Td
+(cleaning and cable inspection.) Tj
+0 -14 Td
+(- Do not return the door to automatic service until three consecutive open-close cycles) Tj
+0 -14 Td
+(complete without false obstruction alarm.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(FIELD NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(The distinction between glare and wiring faults creates a good retrieval target because both) Tj
+0 -14 Td
+(can look intermittent. The guide expects the reviewer to use controller input lights and) Tj
+0 -14 Td
+(temporary shading to separate them.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(A later RAG evaluation could ask what evidence is needed before applying a glare shield. The) Tj
+0 -14 Td
+(answer should come from the diagnostic workflow and recovery sections together, not from a) Tj
+0 -14 Td
+(single sentence.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-03 Dock Door Sensor Fault Isolation Guide - Appendix 1) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 1: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-03 Dock Door Sensor Fault Isolation Guide - Appendix 2) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 2: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-03 Dock Door Sensor Fault Isolation Guide - Appendix 3) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 3: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-03 Dock Door Sensor Fault Isolation Guide - Appendix 4) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 4: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-03 Dock Door Sensor Fault Isolation Guide - Appendix 5) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 5: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-03 Dock Door Sensor Fault Isolation Guide - Appendix 6) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 6: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-03 Dock Door Sensor Fault Isolation Guide - Appendix 7) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 7: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Length 1401 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738 Tm
+(TS-03 Dock Door Sensor Fault Isolation Guide - Appendix 8) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(APPENDIX 8: REFERENCE NOTES) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(This appendix page extends the fictional source material with supporting examples, logging) Tj
+0 -14 Td
+(expectations, and exception notes so later retrieval tests can traverse a longer document) Tj
+0 -14 Td
+(without relying on private or derived content.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Examples on appendix pages are intentionally consistent with the body of the document. They) Tj
+0 -14 Td
+(repeat the same operating vocabulary but add different details such as timings, thresholds,) Tj
+0 -14 Td
+(role ownership, and escalation triggers.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- Record location code, equipment identifier, shift, and operator initials on each manual) Tj
+0 -14 Td
+(intervention.) Tj
+0 -14 Td
+(- If a procedure references a tolerance band, use the tolerance from the most recent approved) Tj
+0 -14 Td
+(revision rather than memory or verbal guidance.) Tj
+0 -14 Td
+(- If a required part is unavailable, tag the task as deferred and note the risk to continued) Tj
+0 -14 Td
+(operation in the maintenance or service log.) Tj
+0 -14 Td
+(- For training simulations, supervisors may role-play escalation decisions, but the written) Tj
+0 -14 Td
+(record should still reflect the documented path in this guide.) Tj
+0 -14 Td
+() Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Pages /Kids [13 0 R 14 0 R 15 0 R 16 0 R 17 0 R 18 0 R 19 0 R 20 0 R 21 0 R 22 0 R] /Count 10 >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+15 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+16 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+17 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+18 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 7 0 R >>
+endobj
+19 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+20 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 9 0 R >>
+endobj
+21 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+22 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 11 0 R >>
+endobj
+23 0 obj
+<< /Type /Catalog /Pages 12 0 R >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000002805 00000 n 
+0000004400 00000 n 
+0000005853 00000 n 
+0000007306 00000 n 
+0000008759 00000 n 
+0000010212 00000 n 
+0000011665 00000 n 
+0000013118 00000 n 
+0000014572 00000 n 
+0000016026 00000 n 
+0000016149 00000 n 
+0000016277 00000 n 
+0000016405 00000 n 
+0000016533 00000 n 
+0000016661 00000 n 
+0000016789 00000 n 
+0000016917 00000 n 
+0000017045 00000 n 
+0000017173 00000 n 
+0000017302 00000 n 
+0000017431 00000 n 
+trailer
+<< /Size 24 /Root 23 0 R >>
+startxref
+17482
+%%EOF

@@ -1,1 +1,3 @@
-# Phase 2+: SQLAlchemy models for documents, pages, chunks, embeddings.
+from app.models.system_info import SystemInfo  # noqa: F401  -- register on Base.metadata
+
+__all__ = ["SystemInfo"]

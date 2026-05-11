@@ -5,10 +5,10 @@ from app.main import app
 client = TestClient(app)
 
 
-def test_health_endpoint_returns_ok():
+def test_liveness_returns_ok():
     response = client.get("/health")
     assert response.status_code == 200
     body = response.json()
     assert body["status"] == "ok"
-    assert body["db"] in {"ok", "down"}
-    assert "app" in body and "version" in body
+    assert "app" in body
+    assert "version" in body
