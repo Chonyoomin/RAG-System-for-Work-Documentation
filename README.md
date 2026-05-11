@@ -41,5 +41,6 @@ This repository contains only **synthetic, fictional, or fully redacted** sample
 
 - **Phase 0 — Foundation.** Repository scaffolding, documentation, portfolio-safety guardrails, placeholder config.
 - **Phase 1 — Backend bootstrap.** FastAPI app, SQLAlchemy session layer, pgvector-ready DB initialization, and a `/health` endpoint with a lightweight DB connectivity check.
+- **Sample Data.** Added realistic sample data to test the RAG system. Ingestion and retrieval.
 
 No ingestion, OCR, indexing, retrieval, or answer generation yet. See [backend/README.md](backend/README.md) for run instructions and [docs/project-scope.md](docs/project-scope.md) for the phase plan.
