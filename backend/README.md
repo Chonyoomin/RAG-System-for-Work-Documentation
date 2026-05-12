@@ -75,11 +75,12 @@ curl http://localhost:8000/health/db
 
 Upload flow:
 
-1. Validate the file extension. Unsupported types return `415`.
-2. Read the file bytes and compute a SHA-256 content hash.
-3. Check the `documents` table for an existing row with the same hash. Duplicates return `409` with the existing `id` and `content_hash`.
-4. Write the file to `<upload_dir>/<sha256><ext>`.
-5. Insert a `documents` row with `original_filename`, `stored_filename`, `mime_type`, `size_bytes`, `content_hash`, `status="uploaded"`, and `uploaded_at`.
+1. Reject empty bodies (`400`) and oversized payloads above `MAX_UPLOAD_BYTES` (`413`, default 25 MiB).
+2. Validate the filename extension against the allow-list. Unsupported types return `415` (`error: "unsupported_file_type"`).
+3. Validate the bytes against a lightweight per-type signature check — `%PDF-` for PDFs, `PK\x03\x04` ZIP magic for DOCX, UTF-8 decodability with no NUL bytes for `.txt` / `.md`. Mismatches return `415` (`error: "invalid_content"`) so an `.exe` renamed to `.pdf` is rejected.
+4. Compute a SHA-256 content hash and check the `documents` table for an existing row. If found, return `409` with the existing `id` and `content_hash` (no file write).
+5. Write the file to `<upload_dir>/<sha256><ext>` (idempotent — concurrent same-content writes hit the same path with the same bytes).
+6. Insert a `documents` row and commit. If the unique-hash constraint fires (concurrent insert won the race), return `409` referencing the winner. If commit fails for any other reason, the just-written file is removed before the error propagates so no orphans accumulate.
 
 Supporting endpoints:
 
@@ -88,7 +89,7 @@ Supporting endpoints:
 
 ## Storage location
 
-Files are written to `<repo_root>/data/uploads/` by default. You can override this with `UPLOAD_DIR`.
+Files are written to `<repo_root>/data/uploads/` by default. Override with `UPLOAD_DIR`. The size cap is `MAX_UPLOAD_BYTES` (default 26214400 = 25 MiB).
 
 `data/uploads/` is already excluded by `.gitignore` along with other private-document and derived-artifact directories. Uploaded files should be treated as local-only working data and must not be committed.
 

@@ -35,6 +35,15 @@ async def upload(
 
     try:
         document = ingestion.ingest(session, file.filename, data)
+    except ingestion.FileTooLarge as exc:
+        raise HTTPException(
+            status_code=413,
+            detail={
+                "error": "file_too_large",
+                "size_bytes": exc.size,
+                "limit_bytes": exc.limit,
+            },
+        )
     except ingestion.UnsupportedFileType as exc:
         raise HTTPException(
             status_code=415,
@@ -42,6 +51,14 @@ async def upload(
                 "error": "unsupported_file_type",
                 "extension": exc.extension,
                 "allowed": sorted(storage.ALLOWED_EXTENSIONS),
+            },
+        )
+    except ingestion.InvalidFileContent as exc:
+        raise HTTPException(
+            status_code=415,
+            detail={
+                "error": "invalid_content",
+                "reason": exc.reason,
             },
         )
     except ingestion.DuplicateDocument as exc:

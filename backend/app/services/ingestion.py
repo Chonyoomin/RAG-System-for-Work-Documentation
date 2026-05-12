@@ -1,5 +1,6 @@
 import logging
 
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
@@ -15,6 +16,19 @@ class UnsupportedFileType(Exception):
         self.extension = extension
 
 
+class InvalidFileContent(Exception):
+    def __init__(self, reason: str):
+        super().__init__(reason)
+        self.reason = reason
+
+
+class FileTooLarge(Exception):
+    def __init__(self, size: int, limit: int):
+        super().__init__(f"{size} > {limit}")
+        self.size = size
+        self.limit = limit
+
+
 class DuplicateDocument(Exception):
     def __init__(self, existing: Document):
         super().__init__(existing.content_hash)
@@ -22,18 +36,26 @@ class DuplicateDocument(Exception):
 
 
 def ingest(session: Session, original_filename: str, data: bytes) -> Document:
+    if len(data) > settings.max_upload_bytes:
+        raise FileTooLarge(len(data), settings.max_upload_bytes)
+
     if not storage.is_allowed(original_filename):
         raise UnsupportedFileType(storage.extension_for(original_filename) or "<none>")
 
+    extension = storage.extension_for(original_filename)
+    invalid_reason = storage.validate_content(extension, data)
+    if invalid_reason:
+        raise InvalidFileContent(invalid_reason)
+
     content_hash = storage.compute_hash(data)
+
     existing = session.query(Document).filter_by(content_hash=content_hash).one_or_none()
     if existing is not None:
-        logger.info("duplicate upload rejected hash=%s existing_id=%s", content_hash[:8], existing.id)
+        logger.info("duplicate (pre-check) hash=%s existing_id=%s", content_hash[:8], existing.id)
         raise DuplicateDocument(existing)
 
-    extension = storage.extension_for(original_filename)
     stored_filename = storage.stored_filename_for(content_hash, extension)
-    storage.write_bytes(settings.upload_dir, stored_filename, data)
+    file_path = storage.write_bytes(settings.upload_dir, stored_filename, data)
 
     document = Document(
         original_filename=original_filename,
@@ -44,7 +66,22 @@ def ingest(session: Session, original_filename: str, data: bytes) -> Document:
         status="uploaded",
     )
     session.add(document)
-    session.commit()
+    try:
+        session.commit()
+    except IntegrityError:
+        # Race past pre-check: a concurrent insert claimed the unique hash.
+        # The file path is hash-derived so the winner's content matches what we wrote -- not orphaned.
+        session.rollback()
+        winner = session.query(Document).filter_by(content_hash=content_hash).one()
+        logger.info("duplicate (race) hash=%s existing_id=%s", content_hash[:8], winner.id)
+        raise DuplicateDocument(winner)
+    except Exception:
+        # Non-integrity DB failure: pre-check passed and no race row exists, so our file
+        # is genuinely orphaned. Remove it before propagating.
+        session.rollback()
+        file_path.unlink(missing_ok=True)
+        raise
+
     session.refresh(document)
     logger.info(
         "ingested document id=%s hash=%s name=%s size=%d",
