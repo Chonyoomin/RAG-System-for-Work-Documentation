@@ -86,6 +86,22 @@ Supporting endpoints:
 
 - `GET /documents/` lists uploaded document metadata.
 - `GET /documents/{id}` returns one document row or `404`.
+- `POST /documents/{id}/extract` runs parsing + OCR fallback (see below) and persists pages.
+- `GET /documents/{id}/pages` returns the persisted pages in order.
+
+## Extraction
+
+Extraction is decoupled from upload. Call `POST /documents/{id}/extract` to parse the stored file and persist page-level rows in the `pages` table.
+
+Per-type behavior:
+
+- **PDF** — `pymupdf` extracts page text in document order. Pages whose native text is empty (image-only / scanned) trigger an OCR fallback: the page is rendered at 200 DPI and run through local Tesseract via `pytesseract`. Source on each page is `native_pdf` or `ocr_pdf`.
+- **DOCX** — `python-docx` reads paragraphs in order and joins them with blank lines into a single page (`page_number=1`, `source="docx"`). Phase 1 keeps DOCX as one provenance unit; later chunking can subdivide.
+- **TXT / MD** — read directly as UTF-8 into a single page (`page_number=1`, `source="text"`).
+
+Re-running `/extract` is **idempotent**: existing `pages` rows for the document are deleted and re-inserted. Document `status` transitions: `uploaded` → `extracted` on success, or `uploaded` → `extraction_failed` (and remains there until a successful re-run) on parsing/OCR errors. The handler returns `500 {"error":"extraction_failed","reason":"..."}` for failures and `404` if the document doesn't exist. Tesseract must be installed locally for the OCR fallback path.
+
+The `pages` table preserves the provenance keys later phases need: `document_id` foreign key, 1-based `page_number`, deterministic ordering by ordinal, and the `source` indicator. Chunking (next Phase 1 slice) will reference these rows.
 
 ## Storage location
 
@@ -118,6 +134,7 @@ alembic downgrade -1
 ```
 
 - `0001_initial` enables the `pgvector` extension and creates `system_info`.
-- `0002_add_documents` creates the `documents` table used by the Phase 2 ingestion flow.
+- `0002_add_documents` creates the `documents` table used by the upload flow.
+- `0003_add_pages` creates the `pages` table used by the extraction flow (FK to `documents` with `ON DELETE CASCADE`, unique on `(document_id, page_number)`).
 
-`system_info` remains as the lightweight Phase 1 bootstrap marker. `documents` is the first Phase 2 operational table. Later phases can add `pages`, `chunks`, and processing-state tables on top of this migration history.
+`system_info` remains as the lightweight bootstrap marker. `documents` and `pages` are the operational tables backing upload and extraction respectively. Later Phase 1 work (chunking) and Phase 2 (indexing) will add `chunks` and embedding tables on top of this migration history.
