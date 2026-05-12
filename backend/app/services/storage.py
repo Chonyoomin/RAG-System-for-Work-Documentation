@@ -1,4 +1,5 @@
 import hashlib
+import zipfile
 from pathlib import Path
 
 ALLOWED_EXTENSIONS = {".pdf", ".docx", ".txt", ".md"}
@@ -10,8 +11,10 @@ MIME_BY_EXTENSION = {
     ".md": "text/markdown",
 }
 
-_PDF_MAGIC = b"%PDF-"
-_ZIP_MAGIC = b"PK\x03\x04"
+PDF_MAGIC = b"%PDF-"
+ZIP_MAGIC = b"PK\x03\x04"
+
+_DOCX_REQUIRED_ENTRIES = {"[Content_Types].xml", "word/document.xml"}
 
 
 def extension_for(filename: str) -> str:
@@ -30,31 +33,13 @@ def stored_filename_for(content_hash: str, extension: str) -> str:
     return f"{content_hash}{extension}"
 
 
-def write_bytes(root: Path, stored_filename: str, data: bytes) -> Path:
-    root.mkdir(parents=True, exist_ok=True)
-    target = root / stored_filename
-    target.write_bytes(data)
-    return target
-
-
-def _looks_like_text(data: bytes) -> bool:
-    if b"\x00" in data:
-        return False
+def validate_docx_structure(path: Path) -> str | None:
     try:
-        data.decode("utf-8")
-    except UnicodeDecodeError:
-        return False
-    return True
-
-
-def validate_content(extension: str, data: bytes) -> str | None:
-    if extension == ".pdf":
-        if not data.startswith(_PDF_MAGIC):
-            return "missing PDF signature (expected '%PDF-')"
-    elif extension == ".docx":
-        if not data.startswith(_ZIP_MAGIC):
-            return "missing DOCX/ZIP signature (expected 'PK\\x03\\x04')"
-    elif extension in {".txt", ".md"}:
-        if not _looks_like_text(data):
-            return "not valid UTF-8 text or contains NUL bytes"
+        with zipfile.ZipFile(path) as zf:
+            names = set(zf.namelist())
+    except zipfile.BadZipFile:
+        return "DOCX is not a valid ZIP archive"
+    missing = _DOCX_REQUIRED_ENTRIES - names
+    if missing:
+        return f"DOCX missing required entries: {sorted(missing)}"
     return None
