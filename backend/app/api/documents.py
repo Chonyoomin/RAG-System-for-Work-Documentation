@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.db.session import get_session
-from app.models import Document
-from app.services import ingestion, storage
+from app.models import Document, Page
+from app.services import extraction, ingestion, storage
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
@@ -108,3 +108,40 @@ def get_document(document_id: int, session: Session = Depends(get_session)):
     if document is None:
         raise HTTPException(status_code=404, detail="document not found")
     return _to_dict(document)
+
+
+@router.post("/{document_id}/extract")
+def extract_document(document_id: int, session: Session = Depends(get_session)):
+    document = session.get(Document, document_id)
+    if document is None:
+        raise HTTPException(status_code=404, detail="document not found")
+    try:
+        result = extraction.extract_and_persist(session, document)
+    except extraction.ExtractionError as exc:
+        raise HTTPException(
+            status_code=500,
+            detail={"error": "extraction_failed", "reason": str(exc)},
+        )
+    return {
+        "document_id": document.id,
+        "status": document.status,
+        "page_count": result.page_count,
+        "sources": result.sources,
+    }
+
+
+@router.get("/{document_id}/pages")
+def list_pages(document_id: int, session: Session = Depends(get_session)):
+    document = session.get(Document, document_id)
+    if document is None:
+        raise HTTPException(status_code=404, detail="document not found")
+    pages = (
+        session.query(Page)
+        .filter_by(document_id=document_id)
+        .order_by(Page.page_number)
+        .all()
+    )
+    return [
+        {"page_number": p.page_number, "source": p.source, "text": p.text}
+        for p in pages
+    ]
