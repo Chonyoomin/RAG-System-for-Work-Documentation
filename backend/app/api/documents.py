@@ -1,11 +1,14 @@
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile
 from sqlalchemy.orm import Session
 
+from app.core.config import settings
 from app.db.session import get_session
 from app.models import Document
 from app.services import ingestion, storage
 
 router = APIRouter(prefix="/documents", tags=["documents"])
+
+_READ_CHUNK = 64 * 1024
 
 
 def _to_dict(d: Document) -> dict:
@@ -21,20 +24,52 @@ def _to_dict(d: Document) -> dict:
     }
 
 
+def _too_large(size: int, limit: int) -> HTTPException:
+    return HTTPException(
+        status_code=413,
+        detail={"error": "file_too_large", "size_bytes": size, "limit_bytes": limit},
+    )
+
+
 @router.post("/upload", status_code=201)
 async def upload(
+    request: Request,
     file: UploadFile = File(...),
     session: Session = Depends(get_session),
 ):
     if not file.filename:
         raise HTTPException(status_code=400, detail="filename missing")
 
-    data = await file.read()
+    limit = settings.max_upload_bytes
+
+    declared = request.headers.get("content-length")
+    if declared is not None:
+        try:
+            declared_size = int(declared)
+        except ValueError:
+            declared_size = None
+        if declared_size is not None and declared_size > limit:
+            raise _too_large(declared_size, limit)
+
+    chunks: list[bytes] = []
+    total = 0
+    while True:
+        chunk = await file.read(_READ_CHUNK)
+        if not chunk:
+            break
+        total += len(chunk)
+        if total > limit:
+            raise _too_large(total, limit)
+        chunks.append(chunk)
+    data = b"".join(chunks)
+
     if not data:
         raise HTTPException(status_code=400, detail="empty file")
 
     try:
         document = ingestion.ingest(session, file.filename, data)
+    except ingestion.FileTooLarge as exc:
+        raise _too_large(exc.size, exc.limit)
     except ingestion.UnsupportedFileType as exc:
         raise HTTPException(
             status_code=415,
@@ -43,6 +78,11 @@ async def upload(
                 "extension": exc.extension,
                 "allowed": sorted(storage.ALLOWED_EXTENSIONS),
             },
+        )
+    except ingestion.InvalidFileContent as exc:
+        raise HTTPException(
+            status_code=415,
+            detail={"error": "invalid_content", "reason": exc.reason},
         )
     except ingestion.DuplicateDocument as exc:
         raise HTTPException(

@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     database_url: str = "postgresql+psycopg://postgres:postgres@localhost:5432/documentation_rag"
     embedding_model: str = "BAAI/bge-small-en-v1.5"
     upload_dir: Path = _REPO_ROOT / "data" / "uploads"
+    max_upload_bytes: int = 25 * 1024 * 1024
 
 
 settings = Settings()
