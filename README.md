@@ -43,5 +43,6 @@ This repository contains only **synthetic, fictional, or fully redacted** sample
 - **Phase 1 — Backend bootstrap.** FastAPI app, SQLAlchemy session layer, pgvector-ready DB initialization, and a `/health` endpoint with a lightweight DB connectivity check.
 - **Sample Data.** Added realistic sample data to test the RAG system. Ingestion and retrieval.
 - **Phase 1 — Document ingestion.** `POST /documents/upload` with extension validation, SHA-256 hash-based deduplication, local file storage in a git-ignored directory, and a `documents` metadata table.
+- **Phase 1 — Ingestion (in progress).** Upload, validation, storage, parsing, OCR fallback, and page-level provenance are implemented; deterministic chunking remains before Phase 1 is complete.
 
 No OCR, indexing, retrieval, or answer generation yet. See [backend/README.md](backend/README.md) for run instructions and [docs/project-scope.md](docs/project-scope.md) for the phase plan.
