@@ -75,12 +75,12 @@ curl http://localhost:8000/health/db
 
 Upload flow:
 
-1. Reject empty bodies (`400`) and oversized payloads above `MAX_UPLOAD_BYTES` (`413`, default 25 MiB).
+1. Enforce `MAX_UPLOAD_BYTES` (`413`, default 25 MiB) in two layers: an early `Content-Length` check rejects before the body is read; a chunked read with a running total catches uploads where the header is missing or untrusted (e.g., chunked transfer encoding). Empty bodies return `400`.
 2. Validate the filename extension against the allow-list. Unsupported types return `415` (`error: "unsupported_file_type"`).
 3. Validate the bytes against a lightweight per-type signature check — `%PDF-` for PDFs, `PK\x03\x04` ZIP magic for DOCX, UTF-8 decodability with no NUL bytes for `.txt` / `.md`. Mismatches return `415` (`error: "invalid_content"`) so an `.exe` renamed to `.pdf` is rejected.
 4. Compute a SHA-256 content hash and check the `documents` table for an existing row. If found, return `409` with the existing `id` and `content_hash` (no file write).
 5. Write the file to `<upload_dir>/<sha256><ext>` (idempotent — concurrent same-content writes hit the same path with the same bytes).
-6. Insert a `documents` row and commit. If the unique-hash constraint fires (concurrent insert won the race), return `409` referencing the winner. If commit fails for any other reason, the just-written file is removed before the error propagates so no orphans accumulate.
+6. Insert a `documents` row and commit. If the unique-hash constraint fires (concurrent insert won the race), return `409` referencing the winner. The DB row is the source of truth: if the winner stored the bytes under a different extension (so its `stored_filename` differs from ours), our just-written file is orphaned and gets deleted. If commit fails for any non-integrity reason, the just-written file is removed before the error propagates.
 
 Supporting endpoints:
 

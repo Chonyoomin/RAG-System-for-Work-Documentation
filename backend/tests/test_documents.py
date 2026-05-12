@@ -80,14 +80,46 @@ def test_upload_rejects_empty_file_with_400():
     assert response.status_code == 400
 
 
-def test_upload_rejects_oversized_file_with_413(monkeypatch):
+def test_upload_rejects_oversized_file_with_413_via_content_length(monkeypatch):
     monkeypatch.setattr(settings, "max_upload_bytes", 64)
     response = _upload("big.txt", b"X" * 128, "text/plain")
     assert response.status_code == 413
     detail = response.json()["detail"]
     assert detail["error"] == "file_too_large"
     assert detail["limit_bytes"] == 64
-    assert detail["size_bytes"] == 128
+    # size_bytes is approximate: it's the Content-Length (file + multipart envelope) on the
+    # early path or the running total on the chunked path. Either way, it exceeds the limit.
+    assert detail["size_bytes"] > 64
+
+
+def test_chunked_read_enforces_limit_when_content_length_is_absent(monkeypatch):
+    import asyncio
+    from io import BytesIO
+
+    from fastapi import HTTPException, UploadFile
+    from starlette.requests import Request
+
+    monkeypatch.setattr(settings, "max_upload_bytes", 64)
+
+    payload = b"X" * 256
+    upload_file = UploadFile(file=BytesIO(payload), filename="big.txt")
+
+    request = Request({
+        "type": "http",
+        "method": "POST",
+        "path": "/documents/upload",
+        "headers": [],
+    })
+
+    from app.api.documents import upload as upload_handler
+
+    with pytest.raises(HTTPException) as exc:
+        asyncio.run(upload_handler(request=request, file=upload_file, session=None))
+
+    assert exc.value.status_code == 413
+    assert exc.value.detail["error"] == "file_too_large"
+    assert exc.value.detail["limit_bytes"] == 64
+    assert exc.value.detail["size_bytes"] >= 64
 
 
 def test_duplicate_upload_returns_409_referencing_existing_id():
@@ -140,6 +172,52 @@ def test_integrity_error_at_commit_returns_duplicate_referencing_winner(monkeypa
         assert exc_info.value.existing.id == winner_id
     finally:
         session.close()
+
+    # Same extension: loser's path == winner's stored_filename, content is identical,
+    # winner row owns the file -- it should NOT be deleted.
+    shared_path = settings.upload_dir / f"{content_hash}.txt"
+    assert shared_path.exists()
+
+
+def test_integrity_error_cross_extension_cleans_up_loser_orphan(monkeypatch):
+    payload = b"shared synthetic bytes for cross-extension race"
+    content_hash = storage.compute_hash(payload)
+
+    seed = session_module.SessionLocal()
+    winner = Document(
+        original_filename="winner.txt",
+        stored_filename=f"{content_hash}.txt",
+        mime_type="text/plain",
+        size_bytes=len(payload),
+        content_hash=content_hash,
+        status="uploaded",
+    )
+    seed.add(winner)
+    seed.commit()
+    seed.close()
+
+    original_one_or_none = Query.one_or_none
+    state = {"calls": 0}
+
+    def patched_one_or_none(self):
+        state["calls"] += 1
+        if state["calls"] == 1:
+            return None
+        return original_one_or_none(self)
+
+    monkeypatch.setattr(Query, "one_or_none", patched_one_or_none)
+
+    session = session_module.SessionLocal()
+    try:
+        with pytest.raises(ingestion.DuplicateDocument):
+            ingestion.ingest(session, "loser.md", payload)
+    finally:
+        session.close()
+
+    loser_path = settings.upload_dir / f"{content_hash}.md"
+    assert not loser_path.exists(), (
+        "cross-extension loser file is orphaned (winner row points to .txt) -- must be deleted"
+    )
 
 
 def test_db_failure_after_file_write_cleans_up_orphan(monkeypatch):

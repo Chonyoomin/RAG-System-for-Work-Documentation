@@ -69,10 +69,13 @@ def ingest(session: Session, original_filename: str, data: bytes) -> Document:
     try:
         session.commit()
     except IntegrityError:
-        # Race past pre-check: a concurrent insert claimed the unique hash.
-        # The file path is hash-derived so the winner's content matches what we wrote -- not orphaned.
         session.rollback()
         winner = session.query(Document).filter_by(content_hash=content_hash).one()
+        # The DB row is the source of truth for which file is owned.
+        # If the winner stored under a different extension, our file is at a different
+        # path than winner.stored_filename and is orphaned -- delete it.
+        if winner.stored_filename != stored_filename:
+            file_path.unlink(missing_ok=True)
         logger.info("duplicate (race) hash=%s existing_id=%s", content_hash[:8], winner.id)
         raise DuplicateDocument(winner)
     except Exception:
