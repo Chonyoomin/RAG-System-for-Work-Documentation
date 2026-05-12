@@ -1,6 +1,6 @@
 # Backend
 
-FastAPI + SQLAlchemy + PostgreSQL/pgvector. Phase 2 covers backend bootstrap plus safe document ingestion: health endpoints, database foundation, upload, hash-based deduplication, local file storage, and metadata tracking. OCR, text extraction, chunking, embeddings, retrieval, and answer generation are still out of scope.
+FastAPI + SQLAlchemy + PostgreSQL/pgvector. This backend currently covers foundation plus the upload/storage portion of `Phase 1` from [AGENTS.md](../AGENTS.md): health endpoints, database foundation, upload, hash-based deduplication, local file storage, and metadata tracking. Parsing, OCR fallback, deterministic chunking, embeddings, retrieval, and answer generation are still out of scope.
 
 ## Layout
 
@@ -14,8 +14,8 @@ app/
   db/session.py          engine + sessionmaker + get_session dependency
   db/init_db.py          applies Alembic migrations programmatically
   models/
-    system_info.py       Phase 1 bootstrap marker table
-    document.py          Phase 2 upload metadata table
+    system_info.py       Foundation/bootstrap marker table
+    document.py          Phase 1 upload metadata table
   services/storage.py    extension whitelist, hash, file write
   services/ingestion.py  validate -> hash -> dedupe -> store -> persist
   ingestion/             later phase
@@ -118,6 +118,6 @@ alembic downgrade -1
 ```
 
 - `0001_initial` enables the `pgvector` extension and creates `system_info`.
-- `0002_add_documents` creates the `documents` table used by the Phase 2 ingestion flow.
+- `0002_add_documents` creates the `documents` table used by the current Phase 1 upload flow.
 
-`system_info` remains as the lightweight Phase 1 bootstrap marker. `documents` is the first Phase 2 operational table. Later phases can add `pages`, `chunks`, and processing-state tables on top of this migration history.
+`system_info` remains as the lightweight foundation/bootstrap marker. `documents` is the first operational table for the current Phase 1 upload flow. Later Phase 1 work still needs parsing, OCR fallback, deterministic chunking, and provenance-preserving extraction tables before the project moves on to Phase 2 indexing.

@@ -39,4 +39,4 @@ This repository contains only **synthetic, fictional, or fully redacted** sample
 
 ## Status
 
-Phase 0 — repository foundation only. No application logic implemented yet. See [docs/project-scope.md](docs/project-scope.md) for the phase plan.
+Current state: foundation plus early backend upload/bootstrap work. The full `Phase 1` target in [AGENTS.md](AGENTS.md) also includes parsing, OCR fallback, deterministic chunking, and provenance preservation, which are not implemented yet.

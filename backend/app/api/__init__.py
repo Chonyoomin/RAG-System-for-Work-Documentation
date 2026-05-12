@@ -1,1 +1,1 @@
-# Phase 1+: FastAPI routers (upload, query, health).
+# Foundation + Phase 1: FastAPI routers for health and document upload.

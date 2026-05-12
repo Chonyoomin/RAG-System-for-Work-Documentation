@@ -1,1 +1,1 @@
-# Phase 3+: citation-aware retrieval, no-answer policy, exact-quote extraction.
+# Phase 3+: citation-aware retrieval over indexed chunks with provenance.

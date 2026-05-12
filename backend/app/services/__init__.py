@@ -1,1 +1,1 @@
-# Phase 1+: orchestration services that wire ingestion, retrieval, and answering.
+# Shared backend services. Current code supports upload/storage flow; later phases add retrieval and answering orchestration.
