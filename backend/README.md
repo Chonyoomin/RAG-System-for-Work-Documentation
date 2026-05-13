@@ -75,12 +75,12 @@ curl http://localhost:8000/health/db
 
 Upload flow:
 
-1. Enforce `MAX_UPLOAD_BYTES` (`413`, default 25 MiB) in two layers: an early `Content-Length` check rejects before the body is read; a chunked read with a running total catches uploads where the header is missing or untrusted (e.g., chunked transfer encoding). Empty bodies return `400`.
-2. Validate the filename extension against the allow-list. Unsupported types return `415` (`error: "unsupported_file_type"`).
-3. Validate the bytes against a lightweight per-type signature check — `%PDF-` for PDFs, `PK\x03\x04` ZIP magic for DOCX, UTF-8 decodability with no NUL bytes for `.txt` / `.md`. Mismatches return `415` (`error: "invalid_content"`) so an `.exe` renamed to `.pdf` is rejected.
-4. Compute a SHA-256 content hash and check the `documents` table for an existing row. If found, return `409` with the existing `id` and `content_hash` (no file write).
-5. Write the file to `<upload_dir>/<sha256><ext>` (idempotent — concurrent same-content writes hit the same path with the same bytes).
-6. Insert a `documents` row and commit. If the unique-hash constraint fires (concurrent insert won the race), return `409` referencing the winner. The DB row is the source of truth: if the winner stored the bytes under a different extension (so its `stored_filename` differs from ours), our just-written file is orphaned and gets deleted. If commit fails for any non-integrity reason, the just-written file is removed before the error propagates.
+1. Validate the filename extension against the allow-list. Unsupported types return `415` (`error: "unsupported_file_type"`).
+2. Enforce `MAX_UPLOAD_BYTES` (`413`, default 25 MiB) in two layers. The early `Content-Length` check only fires when the declared size exceeds `limit + 1 MiB` — a generous slack so multipart envelope overhead never false-rejects a file at the actual limit. The precise enforcement is the chunked streaming read: a running total aborts the moment file bytes (not envelope) cross the limit.
+3. Stream the body in 64 KiB chunks straight into a temporary file (`<upload_dir>/.incoming-<uuid>`) while updating SHA-256, checking the first chunk's magic bytes (`%PDF-` for PDFs, `PK\x03\x04` for DOCX), and incrementally UTF-8-decoding `.txt` / `.md` to reject NUL bytes or invalid encoding. The handler never holds a second full copy of the body in memory.
+4. Empty bodies return `400`. For `.docx`, after streaming, run a deep structural check via the stdlib `zipfile` module: the archive must contain `[Content_Types].xml` and `word/document.xml`, otherwise `415 invalid_content` — so a generic ZIP renamed to `.docx` is rejected.
+5. Look up the SHA-256 in the `documents` table. If found, return `409` referencing the existing row (the temporary file is removed by the handler's `finally`).
+6. Promote the temporary file to `<upload_dir>/<sha256><ext>` via atomic rename, then insert a `documents` row and commit. On `IntegrityError` (concurrent insert won the race), return `409` referencing the winner; if the winner stored under a different extension, the loser's promoted file is deleted. On any other commit failure, the promoted file is removed before the error propagates.
 
 Supporting endpoints:
 
@@ -99,7 +99,7 @@ Per-type behavior:
 - **DOCX** — `python-docx` reads paragraphs in order and joins them with blank lines into a single page (`page_number=1`, `source="docx"`). Phase 1 keeps DOCX as one provenance unit; later chunking can subdivide.
 - **TXT / MD** — read directly as UTF-8 into a single page (`page_number=1`, `source="text"`).
 
-Re-running `/extract` is **idempotent**: existing `pages` rows for the document are deleted and re-inserted. Document `status` transitions: `uploaded` → `extracted` on success, or `uploaded` → `extraction_failed` (and remains there until a successful re-run) on parsing/OCR errors. The handler returns `500 {"error":"extraction_failed","reason":"..."}` for failures and `404` if the document doesn't exist. Tesseract must be installed locally for the OCR fallback path.
+Re-running `/extract` is **non-destructive on failure**: parsing runs first, and only after it succeeds are the existing `pages` rows replaced with the new ones in a single commit. If parsing or OCR throws, prior page rows are left intact and the document `status` is set to `extraction_failed` so the failure is visible without losing the last known-good extraction. Status transitions: `uploaded` → `extracted` on success; either `uploaded` or `extracted` → `extraction_failed` on a failed attempt; the next successful run flips back to `extracted`. The handler returns `500 {"error":"extraction_failed","reason":"..."}` for failures and `404` if the document doesn't exist. Tesseract must be installed locally for the OCR fallback path.
 
 The `pages` table preserves the provenance keys later phases need: `document_id` foreign key, 1-based `page_number`, deterministic ordering by ordinal, and the `source` indicator. Chunking (next Phase 1 slice) will reference these rows.
 
