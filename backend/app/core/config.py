@@ -24,7 +24,5 @@ class Settings(BaseSettings):
     chunk_size: int = 1000
     chunk_overlap: int = 150
 
-    embedding_dim: int = 384
-
 
 settings = Settings()

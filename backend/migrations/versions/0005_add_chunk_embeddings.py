@@ -11,12 +11,14 @@ import sqlalchemy as sa
 from alembic import op
 from pgvector.sqlalchemy import Vector
 
-from app.core.config import settings
-
 revision: str = "0005"
 down_revision: Union[str, None] = "0004"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
+
+# Frozen at this schema step. Migrations are historical artifacts and must not
+# read runtime settings. Changing embedding dim requires a new migration.
+EMBEDDING_DIM = 384
 
 
 def upgrade() -> None:
@@ -45,7 +47,7 @@ def upgrade() -> None:
         sa.Column("chunk_index", sa.Integer(), nullable=False),
         sa.Column("embedding_model", sa.String(length=128), nullable=False),
         sa.Column("embedding_dim", sa.Integer(), nullable=False),
-        sa.Column("embedding", Vector(settings.embedding_dim), nullable=False),
+        sa.Column("embedding", Vector(EMBEDDING_DIM), nullable=False),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("updated_at", sa.DateTime(timezone=True), nullable=False),
         sa.UniqueConstraint(

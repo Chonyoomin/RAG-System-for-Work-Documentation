@@ -3,9 +3,14 @@ from datetime import datetime, timezone
 from sqlalchemy import DateTime, ForeignKey, Integer, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
-from app.core.config import settings
 from app.db.base import Base
 from app.db.types import EmbeddingVector
+
+# Pinned to the dim baked into migration 0005. Changing this value alone is not
+# a config change: it requires a new migration to alter the pgvector column,
+# coordinated re-embedding of every existing chunk, and a model swap. Treat as
+# schema, not runtime config.
+EMBEDDING_DIM = 384
 
 
 class ChunkEmbedding(Base):
@@ -35,7 +40,7 @@ class ChunkEmbedding(Base):
     embedding_model: Mapped[str] = mapped_column(String(128), nullable=False)
     embedding_dim: Mapped[int] = mapped_column(Integer, nullable=False)
     embedding: Mapped[list[float]] = mapped_column(
-        EmbeddingVector(dim=settings.embedding_dim), nullable=False
+        EmbeddingVector(dim=EMBEDDING_DIM), nullable=False
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
