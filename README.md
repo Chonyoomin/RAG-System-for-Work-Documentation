@@ -40,9 +40,8 @@ This repository contains only **synthetic, fictional, or fully redacted** sample
 ## Status
 
 - **Phase 0 — Foundation.** Repository scaffolding, documentation, portfolio-safety guardrails, placeholder config.
-- **Phase 1 — Backend bootstrap.** FastAPI app, SQLAlchemy session layer, pgvector-ready DB initialization, and a `/health` endpoint with a lightweight DB connectivity check.
 - **Sample Data.** Added realistic sample data to test the RAG system. Ingestion and retrieval.
-- **Phase 1 — Document ingestion.** `POST /documents/upload` with extension validation, SHA-256 hash-based deduplication, local file storage in a git-ignored directory, and a `documents` metadata table.
-- **Phase 1 — Ingestion (in progress).** Upload, validation, storage, parsing, OCR fallback, and page-level provenance are implemented; deterministic chunking remains before Phase 1 is complete.
+- **Phase 1 — Ingestion (complete).** Upload, validation, storage, parsing, OCR fallback, and page-level provenance are implemented.
+- **Phase 1 — Deterministic chunking (complete).** Extracted pages are split into fixed-size overlapping character chunks with chunk-level provenance preserved as `document_id`, `page_number`, `chunk_index`, `char_start`, and `char_end`.
 
-No OCR, indexing, retrieval, or answer generation yet. See [backend/README.md](backend/README.md) for run instructions and [docs/project-scope.md](docs/project-scope.md) for the phase plan.
+No indexing, retrieval, or answer generation yet. See [backend/README.md](backend/README.md) for run instructions and [docs/project-scope.md](docs/project-scope.md) for the phase plan.
