@@ -7,8 +7,8 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.db.session import get_session
-from app.models import Document, Page
-from app.services import extraction, ingestion, storage
+from app.models import Chunk, Document, Page
+from app.services import chunking, extraction, ingestion, storage
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
@@ -198,4 +198,49 @@ def list_pages(document_id: int, session: Session = Depends(get_session)):
     return [
         {"page_number": p.page_number, "source": p.source, "text": p.text}
         for p in pages
+    ]
+
+
+@router.post("/{document_id}/chunk")
+def chunk_document(document_id: int, session: Session = Depends(get_session)):
+    document = session.get(Document, document_id)
+    if document is None:
+        raise HTTPException(status_code=404, detail="document not found")
+    try:
+        result = chunking.chunk_and_persist(session, document)
+    except chunking.ChunkingError as exc:
+        raise HTTPException(
+            status_code=409,
+            detail={"error": "chunking_failed", "reason": str(exc)},
+        )
+    return {
+        "document_id": document.id,
+        "status": document.status,
+        "chunk_count": result.chunk_count,
+        "page_count": result.page_count,
+        "chunk_size": settings.chunk_size,
+        "chunk_overlap": settings.chunk_overlap,
+    }
+
+
+@router.get("/{document_id}/chunks")
+def list_chunks(document_id: int, session: Session = Depends(get_session)):
+    document = session.get(Document, document_id)
+    if document is None:
+        raise HTTPException(status_code=404, detail="document not found")
+    chunks = (
+        session.query(Chunk)
+        .filter_by(document_id=document_id)
+        .order_by(Chunk.page_number, Chunk.chunk_index)
+        .all()
+    )
+    return [
+        {
+            "page_number": c.page_number,
+            "chunk_index": c.chunk_index,
+            "char_start": c.char_start,
+            "char_end": c.char_end,
+            "text": c.text,
+        }
+        for c in chunks
     ]

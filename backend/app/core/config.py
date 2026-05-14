@@ -21,5 +21,8 @@ class Settings(BaseSettings):
     upload_dir: Path = _REPO_ROOT / "data" / "uploads"
     max_upload_bytes: int = 25 * 1024 * 1024
 
+    chunk_size: int = 1000
+    chunk_overlap: int = 150
+
 
 settings = Settings()

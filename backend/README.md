@@ -1,6 +1,6 @@
 # Backend
 
-FastAPI + SQLAlchemy + PostgreSQL/pgvector. Phase 2 covers backend bootstrap plus safe document ingestion: health endpoints, database foundation, upload, hash-based deduplication, local file storage, and metadata tracking. OCR, text extraction, chunking, embeddings, retrieval, and answer generation are still out of scope.
+FastAPI + SQLAlchemy + PostgreSQL/pgvector. Phase 1 covers backend bootstrap plus safe document ingestion through deterministic chunking: health endpoints, database foundation, upload, hash-based deduplication, local file storage, parsing for PDF/DOCX/TXT/MD with OCR fallback, page-level provenance, and fixed-window chunking with chunk-level provenance. Embeddings, indexing, retrieval, and answer generation are still out of scope.
 
 ## Layout
 
@@ -14,10 +14,15 @@ app/
   db/session.py          engine + sessionmaker + get_session dependency
   db/init_db.py          applies Alembic migrations programmatically
   models/
-    system_info.py       Phase 1 bootstrap marker table
-    document.py          Phase 2 upload metadata table
+    system_info.py       bootstrap marker table
+    document.py          upload metadata table
+    page.py              extracted-page provenance table
+    chunk.py             chunk-level provenance table
   services/storage.py    extension whitelist, hash, file write
   services/ingestion.py  validate -> hash -> dedupe -> store -> persist
+  services/parsing.py    PDF/DOCX/TXT/MD parsing + Tesseract OCR fallback
+  services/extraction.py parse -> persist pages (atomic, non-destructive on failure)
+  services/chunking.py   deterministic char-window chunking over persisted pages
   ingestion/             later phase
   retrieval/             later phase
   services/              later phase
@@ -88,6 +93,8 @@ Supporting endpoints:
 - `GET /documents/{id}` returns one document row or `404`.
 - `POST /documents/{id}/extract` runs parsing + OCR fallback (see below) and persists pages.
 - `GET /documents/{id}/pages` returns the persisted pages in order.
+- `POST /documents/{id}/chunk` runs deterministic chunking over the persisted pages (see below) and persists chunks.
+- `GET /documents/{id}/chunks` returns the persisted chunks in `(page_number, chunk_index)` order.
 
 ## Extraction
 
@@ -101,7 +108,21 @@ Per-type behavior:
 
 Re-running `/extract` is **non-destructive on failure**: parsing runs first, and only after it succeeds are the existing `pages` rows replaced with the new ones in a single commit. If parsing or OCR throws, prior page rows are left intact and the document `status` is set to `extraction_failed` so the failure is visible without losing the last known-good extraction. Status transitions: `uploaded` → `extracted` on success; either `uploaded` or `extracted` → `extraction_failed` on a failed attempt; the next successful run flips back to `extracted`. The handler returns `500 {"error":"extraction_failed","reason":"..."}` for failures and `404` if the document doesn't exist. Tesseract must be installed locally for the OCR fallback path.
 
-The `pages` table preserves the provenance keys later phases need: `document_id` foreign key, 1-based `page_number`, deterministic ordering by ordinal, and the `source` indicator. Chunking (next Phase 1 slice) will reference these rows.
+The `pages` table preserves the provenance keys later phases need: `document_id` foreign key, 1-based `page_number`, deterministic ordering by ordinal, and the `source` indicator. The chunking step references these rows.
+
+## Chunking
+
+Chunking is decoupled from extraction. Call `POST /documents/{id}/chunk` to split persisted page text into deterministic, fixed-size character windows and persist `chunks` rows.
+
+Behavior:
+
+- **Input is page rows, not raw uploads.** Chunking reads the `pages` table, so re-running it is a pure DB operation: no re-parsing, no re-OCR.
+- **Per-page, no cross-page boundaries.** Each page is windowed independently. Chunks never span pages, which keeps citation and quote anchoring honest.
+- **Fixed character windows with fixed overlap.** Defaults: `CHUNK_SIZE = 1000`, `CHUNK_OVERLAP = 150` (overrideable via env). The window step is `chunk_size - chunk_overlap`. A page whose text fits in one window produces a single chunk spanning `(0, len(text))`. Otherwise, windows advance by step until the final window reaches end-of-text. The overlap is constant; window text is exactly `page_text[char_start:char_end]`.
+- **Provenance triple persisted per chunk.** Each chunk row carries `(document_id, page_id, page_number, chunk_index, char_start, char_end, text)`. `chunk_index` is 0-based per page. `(page_id, chunk_index)` is unique. The triple `(document_id, page_number, chunk_index)` plus the `char_start/char_end` offsets is what later indexing, retrieval, and exact-quote rendering will hang off of.
+- **Requires extraction first.** If the document hasn't been extracted (or extraction left no pages), `/chunk` returns `409 {"error":"chunking_failed","reason":"..."}`. Unknown documents return `404`.
+- **Idempotent replace on re-run.** Re-running `/chunk` deletes the document's existing chunk rows and writes a fresh deterministic set in a single commit. Same input → same output. After a successful re-extraction, the next `/chunk` call rebuilds chunks against the new pages.
+- **Status transition.** A successful chunking call sets `document.status = "chunked"`. Re-running on an already-`chunked` document is allowed and remains idempotent.
 
 ## Storage location
 
@@ -136,5 +157,6 @@ alembic downgrade -1
 - `0001_initial` enables the `pgvector` extension and creates `system_info`.
 - `0002_add_documents` creates the `documents` table used by the upload flow.
 - `0003_add_pages` creates the `pages` table used by the extraction flow (FK to `documents` with `ON DELETE CASCADE`, unique on `(document_id, page_number)`).
+- `0004_add_chunks` creates the `chunks` table used by the chunking flow (FKs to `documents` and `pages` with `ON DELETE CASCADE`, unique on `(page_id, chunk_index)`).
 
-`system_info` remains as the lightweight bootstrap marker. `documents` and `pages` are the operational tables backing upload and extraction respectively. Later Phase 1 work (chunking) and Phase 2 (indexing) will add `chunks` and embedding tables on top of this migration history.
+`system_info` remains as the lightweight bootstrap marker. `documents`, `pages`, and `chunks` are the operational tables backing upload, extraction, and chunking. Later phases (indexing, embeddings) will add embedding/vector tables that reference `chunks`.
