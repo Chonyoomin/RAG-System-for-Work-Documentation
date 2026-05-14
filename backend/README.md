@@ -18,6 +18,8 @@ app/
     document.py          upload metadata table
     page.py              extracted-page provenance table
     chunk.py             chunk-level provenance table
+    embedding.py         per-(chunk, model) embedding row (Phase 2 storage)
+  db/types.py            EmbeddingVector: pgvector on Postgres, JSON on SQLite
   services/storage.py    extension whitelist, hash, file write
   services/ingestion.py  validate -> hash -> dedupe -> store -> persist
   services/parsing.py    PDF/DOCX/TXT/MD parsing + Tesseract OCR fallback
@@ -158,5 +160,6 @@ alembic downgrade -1
 - `0002_add_documents` creates the `documents` table used by the upload flow.
 - `0003_add_pages` creates the `pages` table used by the extraction flow (FK to `documents` with `ON DELETE CASCADE`, unique on `(document_id, page_number)`).
 - `0004_add_chunks` creates the `chunks` table used by the chunking flow (FKs to `documents` and `pages` with `ON DELETE CASCADE`, unique on `(page_id, chunk_index)`).
+- `0005_add_chunk_embeddings` creates the `chunk_embeddings` table used by Phase 2 indexing (FKs to `documents`, `pages`, `chunks` with `ON DELETE CASCADE`, unique on `(chunk_id, embedding_model)`, `embedding` column typed as pgvector `Vector(embedding_dim)`).
 
-`system_info` remains as the lightweight bootstrap marker. `documents`, `pages`, and `chunks` are the operational tables backing upload, extraction, and chunking. Later phases (indexing, embeddings) will add embedding/vector tables that reference `chunks`.
+`system_info` remains as the lightweight bootstrap marker. `documents`, `pages`, and `chunks` are the operational tables backing upload, extraction, and chunking. `chunk_embeddings` is the Phase 2 storage foundation — embedding generation itself is not yet implemented.
