@@ -20,6 +20,7 @@ A source-grounded documentation retrieval prototype. The system ingests work-sty
 - This is a prototype. Avoid overengineering.
 - Prefer framework-native solutions in LlamaIndex and LangChain over custom RAG plumbing.
 - Frameworks replace plumbing, not quality controls — keep source-grounding and citation logic explicit and verifiable.
+- No source, no answer.
 - Deterministic preprocessing where possible. Reserve LLM calls for steps that truly need them.
 - Keep recurring costs low.
 - No speculative abstractions, no half-finished implementations, no extra services beyond what each phase requires.
@@ -30,6 +31,7 @@ This repository is public.
 
 - Never commit proprietary documents, internal screenshots, real identifiers, secrets, tokens, or real config values.
 - Never commit logs, OCR output, processed outputs, vector artifacts, or caches derived from private documents.
+- Never commit user uploads containing real source files.
 - Only synthetic, fictional, or fully redacted sample data is allowed.
 - Use placeholder values in `.env.example`. Real `.env` files are git-ignored.
 - See [docs/github-safety.md](docs/github-safety.md) before adding any data, fixture, or output file.
@@ -51,4 +53,26 @@ This repository is public.
 
 ## Phase Awareness
 
-Check [docs/project-scope.md](docs/project-scope.md) for the current phase before adding anything. Do not implement features from later phases unless explicitly asked.
+Use [AGENTS.md](AGENTS.md) as the source of truth for overall project progression and [docs/project-scope.md](docs/project-scope.md) for the current phase before adding anything. Do not implement features from later phases unless explicitly asked.
+
+Current phase sequence:
+
+- Phase 0 — Foundation
+- Phase 1 — Ingestion
+- Phase 2 — Indexing
+- Phase 3 — Retrieval
+- Phase 4 — Answering
+- Phase 5 — MVP UI
+
+## Phase 2 Guidance
+
+Use [AGENTS.md](AGENTS.md) as the source of truth for phase progression.
+
+Phase 2 is indexing only:
+
+- use persisted chunks as the indexing input
+- generate embeddings from chunk text
+- persist vectors and chunk linkage in PostgreSQL + pgvector
+- preserve provenance linkage through document / page / chunk
+
+Do not implement retrieval, ranking, citation formatting, no-answer policy, or answer generation in Phase 2.
