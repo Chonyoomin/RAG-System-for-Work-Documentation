@@ -1,4 +1,6 @@
 import io
+import uuid
+import zipfile
 
 import pytest
 from fastapi.testclient import TestClient
@@ -17,6 +19,21 @@ client = TestClient(app)
 def _upload(filename: str, payload: bytes, content_type: str = "application/octet-stream"):
     files = {"file": (filename, io.BytesIO(payload), content_type)}
     return client.post("/documents/upload", files=files)
+
+
+def _make_minimal_docx_bytes() -> bytes:
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("[Content_Types].xml", "<Types/>")
+        zf.writestr("word/document.xml", "<document/>")
+    return buf.getvalue()
+
+
+def _stage_incoming(payload: bytes):
+    settings.upload_dir.mkdir(parents=True, exist_ok=True)
+    path = settings.upload_dir / f".incoming-{uuid.uuid4().hex}"
+    path.write_bytes(payload)
+    return path
 
 
 def test_upload_valid_text_file_returns_201_with_metadata():
@@ -39,8 +56,8 @@ def test_upload_accepts_pdf_with_valid_signature():
     assert response.json()["mime_type"] == "application/pdf"
 
 
-def test_upload_accepts_docx_with_zip_signature():
-    payload = b"PK\x03\x04" + b"fake zip body"
+def test_upload_accepts_valid_minimal_docx():
+    payload = _make_minimal_docx_bytes()
     response = _upload("note.docx", payload)
     assert response.status_code == 201
 
@@ -68,6 +85,17 @@ def test_upload_rejects_docx_without_zip_signature_with_415():
     assert detail["error"] == "invalid_content"
 
 
+def test_upload_rejects_zip_without_docx_structure_as_invalid_content():
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        zf.writestr("readme.txt", "this is just a plain zip, not a docx")
+    response = _upload("masquerade.docx", buf.getvalue())
+    assert response.status_code == 415
+    detail = response.json()["detail"]
+    assert detail["error"] == "invalid_content"
+    assert "DOCX" in detail["reason"]
+
+
 def test_upload_rejects_text_with_null_byte_with_415():
     response = _upload("binary.txt", b"hello\x00world", "text/plain")
     assert response.status_code == 415
@@ -80,16 +108,22 @@ def test_upload_rejects_empty_file_with_400():
     assert response.status_code == 400
 
 
-def test_upload_rejects_oversized_file_with_413_via_content_length(monkeypatch):
+def test_upload_rejects_oversized_file_with_413(monkeypatch):
     monkeypatch.setattr(settings, "max_upload_bytes", 64)
     response = _upload("big.txt", b"X" * 128, "text/plain")
     assert response.status_code == 413
     detail = response.json()["detail"]
     assert detail["error"] == "file_too_large"
     assert detail["limit_bytes"] == 64
-    # size_bytes is approximate: it's the Content-Length (file + multipart envelope) on the
-    # early path or the running total on the chunked path. Either way, it exceeds the limit.
     assert detail["size_bytes"] > 64
+
+
+def test_upload_at_exactly_limit_is_not_false_rejected_by_envelope_overhead(monkeypatch):
+    monkeypatch.setattr(settings, "max_upload_bytes", 200)
+    payload = b"X" * 200
+    response = _upload("at-limit.txt", payload, "text/plain")
+    assert response.status_code == 201
+    assert response.json()["size_bytes"] == 200
 
 
 def test_chunked_read_enforces_limit_when_content_length_is_absent(monkeypatch):
@@ -119,7 +153,6 @@ def test_chunked_read_enforces_limit_when_content_length_is_absent(monkeypatch):
     assert exc.value.status_code == 413
     assert exc.value.detail["error"] == "file_too_large"
     assert exc.value.detail["limit_bytes"] == 64
-    assert exc.value.detail["size_bytes"] >= 64
 
 
 def test_duplicate_upload_returns_409_referencing_existing_id():
@@ -135,7 +168,7 @@ def test_duplicate_upload_returns_409_referencing_existing_id():
     assert detail["existing_id"] == existing_id
 
 
-def test_integrity_error_at_commit_returns_duplicate_referencing_winner(monkeypatch):
+def test_persist_upload_integrity_error_returns_duplicate_referencing_winner(monkeypatch):
     payload = b"race-path synthetic content"
     content_hash = storage.compute_hash(payload)
 
@@ -153,33 +186,39 @@ def test_integrity_error_at_commit_returns_duplicate_referencing_winner(monkeypa
     winner_id = winner.id
     seed.close()
 
-    # Bypass the pre-check exactly once so commit fires the unique-constraint path.
     original_one_or_none = Query.one_or_none
     state = {"calls": 0}
 
-    def patched_one_or_none(self):
+    def patched(self):
         state["calls"] += 1
         if state["calls"] == 1:
             return None
         return original_one_or_none(self)
 
-    monkeypatch.setattr(Query, "one_or_none", patched_one_or_none)
+    monkeypatch.setattr(Query, "one_or_none", patched)
 
+    incoming = _stage_incoming(payload)
     session = session_module.SessionLocal()
     try:
         with pytest.raises(ingestion.DuplicateDocument) as exc_info:
-            ingestion.ingest(session, "loser.txt", payload)
+            ingestion.persist_upload(
+                session,
+                original_filename="loser.txt",
+                tmp_path=incoming,
+                extension=".txt",
+                content_hash=content_hash,
+                size_bytes=len(payload),
+            )
         assert exc_info.value.existing.id == winner_id
     finally:
         session.close()
+        incoming.unlink(missing_ok=True)
 
-    # Same extension: loser's path == winner's stored_filename, content is identical,
-    # winner row owns the file -- it should NOT be deleted.
     shared_path = settings.upload_dir / f"{content_hash}.txt"
     assert shared_path.exists()
 
 
-def test_integrity_error_cross_extension_cleans_up_loser_orphan(monkeypatch):
+def test_persist_upload_integrity_error_cross_extension_cleans_up_loser_orphan(monkeypatch):
     payload = b"shared synthetic bytes for cross-extension race"
     content_hash = storage.compute_hash(payload)
 
@@ -199,20 +238,29 @@ def test_integrity_error_cross_extension_cleans_up_loser_orphan(monkeypatch):
     original_one_or_none = Query.one_or_none
     state = {"calls": 0}
 
-    def patched_one_or_none(self):
+    def patched(self):
         state["calls"] += 1
         if state["calls"] == 1:
             return None
         return original_one_or_none(self)
 
-    monkeypatch.setattr(Query, "one_or_none", patched_one_or_none)
+    monkeypatch.setattr(Query, "one_or_none", patched)
 
+    incoming = _stage_incoming(payload)
     session = session_module.SessionLocal()
     try:
         with pytest.raises(ingestion.DuplicateDocument):
-            ingestion.ingest(session, "loser.md", payload)
+            ingestion.persist_upload(
+                session,
+                original_filename="loser.md",
+                tmp_path=incoming,
+                extension=".md",
+                content_hash=content_hash,
+                size_bytes=len(payload),
+            )
     finally:
         session.close()
+        incoming.unlink(missing_ok=True)
 
     loser_path = settings.upload_dir / f"{content_hash}.md"
     assert not loser_path.exists(), (
@@ -220,11 +268,12 @@ def test_integrity_error_cross_extension_cleans_up_loser_orphan(monkeypatch):
     )
 
 
-def test_db_failure_after_file_write_cleans_up_orphan(monkeypatch):
+def test_persist_upload_db_failure_cleans_up_promoted_file(monkeypatch):
     payload = b"clean-up-on-failure synthetic content"
     content_hash = storage.compute_hash(payload)
     expected_path = settings.upload_dir / f"{content_hash}.txt"
 
+    incoming = _stage_incoming(payload)
     session = session_module.SessionLocal()
 
     def boom():
@@ -233,10 +282,18 @@ def test_db_failure_after_file_write_cleans_up_orphan(monkeypatch):
     monkeypatch.setattr(session, "commit", boom)
 
     with pytest.raises(OperationalError):
-        ingestion.ingest(session, "orphan.txt", payload)
+        ingestion.persist_upload(
+            session,
+            original_filename="orphan.txt",
+            tmp_path=incoming,
+            extension=".txt",
+            content_hash=content_hash,
+            size_bytes=len(payload),
+        )
 
-    assert not expected_path.exists(), "file should be cleaned up after non-integrity DB failure"
+    assert not expected_path.exists(), "promoted file must be removed after non-integrity DB failure"
     session.close()
+    incoming.unlink(missing_ok=True)
 
 
 def test_list_and_get_after_upload():

@@ -192,6 +192,43 @@ def test_extraction_failure_marks_document_as_extraction_failed(monkeypatch):
     assert document["status"] == "extraction_failed"
 
 
+def test_failed_re_extraction_preserves_prior_pages_and_marks_failed(monkeypatch):
+    doc_id = _upload_text("v1.txt", "first synthetic content")
+
+    first = client.post(f"/documents/{doc_id}/extract")
+    assert first.status_code == 200
+    pages_before = client.get(f"/documents/{doc_id}/pages").json()
+    assert len(pages_before) == 1
+
+    def boom(_doc):
+        raise RuntimeError("synthetic re-extraction failure")
+
+    monkeypatch.setattr(parsing, "extract", boom)
+
+    second = client.post(f"/documents/{doc_id}/extract")
+    assert second.status_code == 500
+
+    document = client.get(f"/documents/{doc_id}").json()
+    assert document["status"] == "extraction_failed"
+
+    pages_after = client.get(f"/documents/{doc_id}/pages").json()
+    assert pages_after == pages_before, "prior page rows must survive a failed re-extraction"
+
+
+def test_successful_re_extraction_replaces_prior_pages_atomically():
+    doc_id = _upload_text("v1.txt", "synthetic content for re-extract")
+
+    first = client.post(f"/documents/{doc_id}/extract")
+    assert first.status_code == 200
+    page_ids_before = [p["page_number"] for p in client.get(f"/documents/{doc_id}/pages").json()]
+
+    second = client.post(f"/documents/{doc_id}/extract")
+    assert second.status_code == 200
+    pages_after = client.get(f"/documents/{doc_id}/pages").json()
+    assert [p["page_number"] for p in pages_after] == page_ids_before
+    assert len(pages_after) == 1
+
+
 def test_uploaded_document_status_is_uploaded_until_extraction():
     doc_id = _upload_text("pending.txt", "synthetic")
     document = client.get(f"/documents/{doc_id}").json()

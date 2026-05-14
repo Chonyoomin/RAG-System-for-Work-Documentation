@@ -25,8 +25,7 @@ class ExtractionResult:
 
 
 def extract_and_persist(session: Session, document: Document) -> ExtractionResult:
-    session.query(Page).filter_by(document_id=document.id).delete()
-
+    # Parse first; only touch existing pages once we know we have a successful result.
     try:
         extracted = parsing.extract(document)
     except Exception as exc:
@@ -40,6 +39,9 @@ def extract_and_persist(session: Session, document: Document) -> ExtractionResul
         session.commit()
         raise ExtractionError("no pages extracted")
 
+    # Atomic replace inside a single commit: prior pages are kept until we're sure the
+    # new extraction landed cleanly.
+    session.query(Page).filter_by(document_id=document.id).delete()
     for ep in extracted:
         session.add(Page(
             document_id=document.id,
@@ -47,7 +49,6 @@ def extract_and_persist(session: Session, document: Document) -> ExtractionResul
             text=ep.text,
             source=ep.source,
         ))
-
     document.status = STATUS_EXTRACTED
     session.commit()
     session.refresh(document)
