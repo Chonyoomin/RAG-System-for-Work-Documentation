@@ -1,6 +1,6 @@
 # Backend
 
-FastAPI + SQLAlchemy + PostgreSQL/pgvector. Phase 1 covers backend bootstrap plus safe document ingestion through deterministic chunking. Phase 2 adds local embedding generation and per-(chunk, model) vector persistence using LangChain's HuggingFace embeddings wrapper around `BAAI/bge-small-en-v1.5`. Retrieval, ranking, citation formatting, no-answer policy, answer generation, and frontend work are still out of scope.
+FastAPI + SQLAlchemy + PostgreSQL/pgvector. Phase 1 covers backend bootstrap plus safe document ingestion through deterministic chunking. Phase 2 adds local embedding generation and per-(chunk, model) vector persistence using LangChain's HuggingFace embeddings wrapper around `BAAI/bge-small-en-v1.5`. Phase 3 (in progress) adds retrieval: `POST /retrieve` embeds the query with the same local model and returns provenance-rich top-k chunks via pgvector cosine search. Ranking, citation formatting for answers, no-answer policy, answer generation, and frontend work are still out of scope.
 
 ## Layout
 
@@ -27,6 +27,8 @@ app/
   services/chunking.py   deterministic char-window chunking over persisted pages
   services/embedding.py  lazy LangChain HuggingFaceEmbeddings wrapper (local model)
   services/indexing.py   embed persisted chunks -> upsert chunk_embeddings rows
+  services/retrieval.py  embed query -> pgvector cosine search -> ranked provenance hits
+  api/retrieval.py       POST /retrieve
   ingestion/             later phase
   retrieval/             later phase
   services/              later phase
@@ -164,6 +166,56 @@ Response shape:
 - `indexed_count` and `is_fully_indexed` reflect the **active** embedding model only (`embedding.EMBEDDING_MODEL`). `is_fully_indexed` is `chunk_count > 0 AND indexed_count == chunk_count` — a chunkless document is reported as not fully indexed.
 - `embedding_models` is a per-model breakdown grouped from `chunk_embeddings`. If a document has been re-indexed under multiple model names, all of them appear here in alphabetical order.
 - `404` if the document doesn't exist. No vectors are ever returned in the payload.
+
+## Retrieval
+
+`POST /retrieve` is the Phase 3 retrieval foundation. It embeds the query with the same local model used for indexing, runs a cosine-similarity vector search against `chunk_embeddings`, and returns ranked persisted chunks with full provenance.
+
+Request:
+
+```json
+{ "query": "how do I rotate the credentials?", "top_k": 5 }
+```
+
+`top_k` is optional (default 5, max 50). Empty/whitespace queries are rejected (`422` from validation; `409 retrieval_failed` for whitespace-only).
+
+Response:
+
+```json
+{
+  "query": "...",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "embedding_dim": 384,
+  "top_k": 5,
+  "results": [
+    {
+      "document_id": 7,
+      "page_id": 12,
+      "page_number": 2,
+      "chunk_id": 41,
+      "chunk_index": 1,
+      "char_start": 1000,
+      "char_end": 2000,
+      "text": "...",
+      "score": 0.83,
+      "distance": 0.17,
+      "embedding_model": "BAAI/bge-small-en-v1.5",
+      "original_filename": "runbook.md"
+    }
+  ]
+}
+```
+
+Behavior:
+
+- **Search surface is `chunk_embeddings` only.** Retrieval reads vector rows for the active embedding model (`embedding.EMBEDDING_MODEL`) and joins back to `chunks` and `documents` for provenance and text. Unindexed documents are invisible to retrieval by construction.
+- **Query embedding uses the same local model as indexing.** The query goes through `embedding.embedder.embed_texts([query])`. Schema dim is enforced before searching, so a model swap that changes dim fails fast instead of returning silent garbage.
+- **Cosine similarity, deterministic ordering.** On Postgres the search uses pgvector's `<=>` (cosine distance) operator with `ORDER BY distance ASC, chunk_id ASC`. Lower distance / higher score wins; `chunk_id` breaks ties.
+- **Production path is pgvector.** A narrowly-scoped Python cosine fallback exists in [app/services/retrieval.py](app/services/retrieval.py) for the SQLite-based fast test suite; it computes the same ordering in Python and returns the same shape. The fallback is not exercised in production.
+- **No vectors in API responses.** Each result carries text + provenance + scores only. Raw embeddings stay in the database.
+- **Errors.** No indexed chunks → `409 retrieval_failed`. Empty query → `422` (Pydantic) or `409` for whitespace-only. `top_k` out of `[1, 50]` → `422`.
+
+This slice is retrieval foundation only. Reranking, hybrid search, no-answer policy, citation formatting for answers, and answer generation are explicitly out of scope until Phase 3 continues / Phase 4.
 
 ## Storage location
 
