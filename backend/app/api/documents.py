@@ -7,8 +7,8 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.db.session import get_session
-from app.models import Chunk, Document, Page
-from app.services import chunking, extraction, ingestion, storage
+from app.models import Chunk, ChunkEmbedding, Document, Page
+from app.services import chunking, extraction, indexing, ingestion, storage
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
@@ -243,4 +243,53 @@ def list_chunks(document_id: int, session: Session = Depends(get_session)):
             "text": c.text,
         }
         for c in chunks
+    ]
+
+
+@router.post("/{document_id}/index")
+def index_document(document_id: int, session: Session = Depends(get_session)):
+    document = session.get(Document, document_id)
+    if document is None:
+        raise HTTPException(status_code=404, detail="document not found")
+    try:
+        result = indexing.index_document(session, document)
+    except indexing.IndexingError as exc:
+        raise HTTPException(
+            status_code=409,
+            detail={"error": "indexing_failed", "reason": str(exc)},
+        )
+    return {
+        "document_id": document.id,
+        "status": document.status,
+        "chunk_count": result.chunk_count,
+        "indexed_count": result.indexed_count,
+        "embedding_model": result.embedding_model,
+        "embedding_dim": result.embedding_dim,
+    }
+
+
+@router.get("/{document_id}/embeddings")
+def list_embeddings(document_id: int, session: Session = Depends(get_session)):
+    document = session.get(Document, document_id)
+    if document is None:
+        raise HTTPException(status_code=404, detail="document not found")
+    rows = (
+        session.query(ChunkEmbedding)
+        .filter_by(document_id=document_id)
+        .order_by(
+            ChunkEmbedding.embedding_model,
+            ChunkEmbedding.page_number,
+            ChunkEmbedding.chunk_index,
+        )
+        .all()
+    )
+    return [
+        {
+            "chunk_id": r.chunk_id,
+            "page_number": r.page_number,
+            "chunk_index": r.chunk_index,
+            "embedding_model": r.embedding_model,
+            "embedding_dim": r.embedding_dim,
+        }
+        for r in rows
     ]
