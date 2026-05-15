@@ -43,5 +43,8 @@ This repository contains only **synthetic, fictional, or fully redacted** sample
 - **Sample Data.** Added realistic sample data to test the RAG system. Ingestion and retrieval.
 - **Phase 1 — Ingestion (complete).** Upload, validation, storage, parsing, OCR fallback, and page-level provenance are implemented.
 - **Phase 1 — Deterministic chunking (complete).** Extracted pages are split into fixed-size overlapping character chunks with chunk-level provenance preserved as `document_id`, `page_number`, `chunk_index`, `char_start`, and `char_end`.
+- **Phase 2 — Indexing foundation (complete).** `chunk_embeddings` persistence is in place with pgvector-ready schema, strict provenance linkage back to chunks/pages/documents, and deterministic embedding-dimension handling.
+- **Phase 2 — Local indexing workflow (complete).** Chunk text can be embedded with the local model and persisted per `(chunk_id, embedding_model)` through a deterministic per-document indexing path.
+- **Phase 2 — Indexing inspection (complete).** Document-level indexing coverage can be inspected without exposing raw vectors, including chunk counts, indexed counts, and per-model coverage.
 
-No indexing, retrieval, or answer generation yet. See [backend/README.md](backend/README.md) for run instructions and [docs/project-scope.md](docs/project-scope.md) for the phase plan.
+No retrieval or answer generation yet. See [backend/README.md](backend/README.md) for run instructions and [docs/project-scope.md](docs/project-scope.md) for the phase plan.
