@@ -130,6 +130,41 @@ Behavior:
 - **Idempotent replace on re-run.** Re-running `/chunk` deletes the document's existing chunk rows and writes a fresh deterministic set in a single commit. Same input → same output. After a successful re-extraction, the next `/chunk` call rebuilds chunks against the new pages.
 - **Status transition.** A successful chunking call sets `document.status = "chunked"`. Re-running on an already-`chunked` document is allowed and remains idempotent.
 
+## Indexing
+
+Indexing is decoupled from chunking. Call `POST /documents/{id}/index` to embed the document's persisted chunks with the local model and write rows into `chunk_embeddings`.
+
+- **Input is chunk rows.** The flow loads `chunks` for the document and embeds `chunk.text`. No re-parsing, no re-OCR, no re-chunking.
+- **Local model only.** [app/services/embedding.py](app/services/embedding.py) wraps LangChain's `HuggingFaceEmbeddings` around `BAAI/bge-small-en-v1.5` (384-dim). The model loads lazily on first call so the fast test suite (which monkeypatches `embedder.embed_texts`) never pays the download cost.
+- **Per-(chunk, model) persistence.** One row per chunk per `embedding_model`, keyed by the existing `(chunk_id, embedding_model)` unique constraint. Each row carries the full provenance set: `document_id`, `page_id`, `chunk_id`, `page_number`, `chunk_index`, `embedding_model`, `embedding_dim`, `embedding`.
+- **Deterministic re-index, scoped to the active model.** Re-running `/index` deletes only this `(document_id, embedding_model)` pair's rows and re-inserts in a single commit. Rows under a different `embedding_model` for the same chunks are left untouched.
+- **Requires chunking first.** If the document hasn't been chunked, `/index` returns `409 {"error":"indexing_failed","reason":"..."}`. Unknown documents return `404`. If the embedder ever returns the wrong vector count or wrong dim for the schema, `/index` aborts before writing anything.
+- **Status transition.** A successful indexing call sets `document.status = "indexed"`. Status flow so far: `uploaded` → `extracted` → `chunked` → `indexed`.
+
+## Indexing inspection
+
+`GET /documents/{id}/index` reports indexing coverage without exposing vectors. Use it to tell whether a document is chunked-but-not-indexed, partially indexed, fully indexed for the active model, or indexed under multiple models.
+
+Response shape:
+
+```json
+{
+  "document_id": 1,
+  "status": "indexed",
+  "chunk_count": 5,
+  "indexed_count": 5,
+  "is_fully_indexed": true,
+  "embedding_models": [
+    {"embedding_model": "BAAI/bge-small-en-v1.5", "indexed_count": 5, "embedding_dim": 384}
+  ]
+}
+```
+
+- `chunk_count` is the count of `chunks` rows for the document.
+- `indexed_count` and `is_fully_indexed` reflect the **active** embedding model only (`embedding.EMBEDDING_MODEL`). `is_fully_indexed` is `chunk_count > 0 AND indexed_count == chunk_count` — a chunkless document is reported as not fully indexed.
+- `embedding_models` is a per-model breakdown grouped from `chunk_embeddings`. If a document has been re-indexed under multiple model names, all of them appear here in alphabetical order.
+- `404` if the document doesn't exist. No vectors are ever returned in the payload.
+
 ## Storage location
 
 Files are written to `<repo_root>/data/uploads/` by default. Override with `UPLOAD_DIR`. The size cap is `MAX_UPLOAD_BYTES` (default 26214400 = 25 MiB).
