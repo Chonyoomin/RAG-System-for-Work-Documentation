@@ -9,6 +9,7 @@ pgvector
 llama-index
 langchain
 langchain-community
+sentence-transformers
 pymupdf
 python-docx
 pillow
