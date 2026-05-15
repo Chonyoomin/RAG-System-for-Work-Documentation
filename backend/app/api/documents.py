@@ -268,22 +268,6 @@ def index_document(document_id: int, session: Session = Depends(get_session)):
     }
 
 
-@router.get("/{document_id}/index")
-def index_coverage(document_id: int, session: Session = Depends(get_session)):
-    document = session.get(Document, document_id)
-    if document is None:
-        raise HTTPException(status_code=404, detail="document not found")
-    cov = indexing.coverage(session, document)
-    return {
-        "document_id": document.id,
-        "status": document.status,
-        "chunk_count": cov.chunk_count,
-        "indexed_count": cov.indexed_count,
-        "is_fully_indexed": cov.is_fully_indexed,
-        "embedding_models": cov.embedding_models,
-    }
-
-
 @router.get("/{document_id}/embeddings")
 def list_embeddings(document_id: int, session: Session = Depends(get_session)):
     document = session.get(Document, document_id)

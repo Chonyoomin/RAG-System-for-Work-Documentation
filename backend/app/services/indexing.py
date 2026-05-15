@@ -1,7 +1,6 @@
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
-from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.models import Chunk, ChunkEmbedding, Document
@@ -24,14 +23,6 @@ class IndexingResult:
     indexed_count: int
     embedding_model: str
     embedding_dim: int
-
-
-@dataclass
-class IndexingCoverage:
-    chunk_count: int
-    indexed_count: int
-    is_fully_indexed: bool
-    embedding_models: list[dict] = field(default_factory=list)
 
 
 def index_document(session: Session, document: Document) -> IndexingResult:
@@ -61,7 +52,8 @@ def index_document(session: Session, document: Document) -> IndexingResult:
                 f"embedder returned dim {len(v)}, schema requires {EMBEDDING_DIM}"
             )
 
-    # Idempotent replace scoped to (document, model) so other models' rows survive.
+    # Idempotent replace scoped to this (document, model) pair so other models'
+    # embeddings for the same chunks remain intact.
     (
         session.query(ChunkEmbedding)
         .filter_by(document_id=document.id, embedding_model=model_name)
@@ -91,39 +83,4 @@ def index_document(session: Session, document: Document) -> IndexingResult:
         indexed_count=len(chunks),
         embedding_model=model_name,
         embedding_dim=EMBEDDING_DIM,
-    )
-
-
-def coverage(session: Session, document: Document) -> IndexingCoverage:
-    chunk_count = session.query(Chunk).filter_by(document_id=document.id).count()
-    grouped = (
-        session.query(
-            ChunkEmbedding.embedding_model,
-            ChunkEmbedding.embedding_dim,
-            func.count(ChunkEmbedding.id).label("n"),
-        )
-        .filter(ChunkEmbedding.document_id == document.id)
-        .group_by(ChunkEmbedding.embedding_model, ChunkEmbedding.embedding_dim)
-        .order_by(ChunkEmbedding.embedding_model)
-        .all()
-    )
-    embedding_models = [
-        {
-            "embedding_model": row.embedding_model,
-            "indexed_count": int(row.n),
-            "embedding_dim": int(row.embedding_dim),
-        }
-        for row in grouped
-    ]
-    active = embedding.EMBEDDING_MODEL
-    indexed_count = next(
-        (m["indexed_count"] for m in embedding_models if m["embedding_model"] == active),
-        0,
-    )
-    is_fully_indexed = chunk_count > 0 and indexed_count == chunk_count
-    return IndexingCoverage(
-        chunk_count=chunk_count,
-        indexed_count=indexed_count,
-        is_fully_indexed=is_fully_indexed,
-        embedding_models=embedding_models,
     )

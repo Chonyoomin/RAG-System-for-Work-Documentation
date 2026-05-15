@@ -1,5 +1,6 @@
 import io
 
+import pytest
 from fastapi.testclient import TestClient
 
 from app.db import session as session_module
@@ -12,17 +13,27 @@ client = TestClient(app)
 
 
 def _stub_embedder(monkeypatch, *, dim: int = EMBEDDING_DIM, fixed_value: float | None = None):
+    """Replace the global embedder with a deterministic stub.
+
+    Each text gets a vector with one element per dim. ``fixed_value`` lets a
+    test pin every element if it doesn't care about content; otherwise we use
+    a hash-derived value so the same text always maps to the same vector
+    (deterministic re-index assertion).
+    """
     def fake(texts: list[str]) -> list[list[float]]:
         out: list[list[float]] = []
         for text in texts:
-            v = fixed_value if fixed_value is not None else (hash(text) % 1000) / 1000.0
+            if fixed_value is not None:
+                v = fixed_value
+            else:
+                v = (hash(text) % 1000) / 1000.0
             out.append([v] * dim)
         return out
     monkeypatch.setattr(embedding.embedder, "embed_texts", fake)
 
 
-def _upload_text(filename: str, content: str) -> int:
-    files = {"file": (filename, io.BytesIO(content.encode("utf-8")), "text/plain")}
+def _upload_text(filename: str, content: str, content_type: str = "text/plain") -> int:
+    files = {"file": (filename, io.BytesIO(content.encode("utf-8")), content_type)}
     response = client.post("/documents/upload", files=files)
     assert response.status_code == 201, response.json()
     return response.json()["id"]
@@ -44,7 +55,8 @@ def test_index_rejects_unchunked_document_with_409(monkeypatch):
     doc_id = _upload_text("pending.txt", "synthetic body")
     response = client.post(f"/documents/{doc_id}/index")
     assert response.status_code == 409
-    assert response.json()["detail"]["error"] == "indexing_failed"
+    detail = response.json()["detail"]
+    assert detail["error"] == "indexing_failed"
 
 
 def test_index_chunked_document_writes_one_embedding_per_chunk(monkeypatch):
@@ -52,7 +64,7 @@ def test_index_chunked_document_writes_one_embedding_per_chunk(monkeypatch):
     doc_id = _upload_extract_chunk("note.txt", "synthetic body for indexing test")
 
     response = client.post(f"/documents/{doc_id}/index")
-    assert response.status_code == 200
+    assert response.status_code == 200, response.json()
     body = response.json()
     assert body["status"] == "indexed"
     assert body["embedding_model"] == embedding.EMBEDDING_MODEL
@@ -61,9 +73,9 @@ def test_index_chunked_document_writes_one_embedding_per_chunk(monkeypatch):
 
     session = session_module.SessionLocal()
     try:
-        chunks = session.query(Chunk).filter_by(document_id=doc_id).count()
-        embs = session.query(ChunkEmbedding).filter_by(document_id=doc_id).count()
-        assert embs == chunks == body["chunk_count"]
+        chunk_count = session.query(Chunk).filter_by(document_id=doc_id).count()
+        emb_count = session.query(ChunkEmbedding).filter_by(document_id=doc_id).count()
+        assert emb_count == chunk_count == body["chunk_count"]
     finally:
         session.close()
 
@@ -75,8 +87,12 @@ def test_indexed_rows_carry_correct_provenance(monkeypatch):
 
     session = session_module.SessionLocal()
     try:
-        chunks = {c.id: c for c in session.query(Chunk).filter_by(document_id=doc_id).all()}
-        for row in session.query(ChunkEmbedding).filter_by(document_id=doc_id).all():
+        chunks = {
+            c.id: c for c in session.query(Chunk).filter_by(document_id=doc_id).all()
+        }
+        rows = session.query(ChunkEmbedding).filter_by(document_id=doc_id).all()
+        assert rows
+        for row in rows:
             chunk = chunks[row.chunk_id]
             assert row.document_id == doc_id
             assert row.page_id == chunk.page_id
@@ -106,10 +122,11 @@ def test_repeat_indexing_is_deterministic_and_does_not_duplicate(monkeypatch):
             .all()
         )
         assert len(rows) == first["indexed_count"]
-        per_chunk: dict[int, int] = {}
+        per_chunk = {}
         for r in rows:
-            per_chunk[r.chunk_id] = per_chunk.get(r.chunk_id, 0) + 1
-        assert all(c == 1 for c in per_chunk.values())
+            per_chunk.setdefault(r.chunk_id, 0)
+            per_chunk[r.chunk_id] += 1
+        assert all(count == 1 for count in per_chunk.values())
     finally:
         session.close()
 
@@ -122,6 +139,7 @@ def test_reindex_replaces_only_same_model_rows(monkeypatch):
     session = session_module.SessionLocal()
     try:
         chunk = session.query(Chunk).filter_by(document_id=doc_id).first()
+        assert chunk is not None
         session.add(ChunkEmbedding(
             document_id=doc_id,
             page_id=chunk.page_id,
@@ -140,12 +158,16 @@ def test_reindex_replaces_only_same_model_rows(monkeypatch):
 
     session = session_module.SessionLocal()
     try:
-        other = session.query(ChunkEmbedding).filter_by(
-            document_id=doc_id, embedding_model="other-model"
-        ).count()
-        primary = session.query(ChunkEmbedding).filter_by(
-            document_id=doc_id, embedding_model=embedding.EMBEDDING_MODEL
-        ).count()
+        other = (
+            session.query(ChunkEmbedding)
+            .filter_by(document_id=doc_id, embedding_model="other-model")
+            .count()
+        )
+        primary = (
+            session.query(ChunkEmbedding)
+            .filter_by(document_id=doc_id, embedding_model=embedding.EMBEDDING_MODEL)
+            .count()
+        )
         assert other == 1, "other-model row must survive a re-index of the primary model"
         assert primary >= 1
     finally:
@@ -166,9 +188,12 @@ def test_index_rejects_dim_mismatch_from_embedder(monkeypatch):
 def test_index_status_transitions_chunked_to_indexed(monkeypatch):
     _stub_embedder(monkeypatch)
     doc_id = _upload_extract_chunk("status.txt", "synthetic")
-    assert client.get(f"/documents/{doc_id}").json()["status"] == "chunked"
+    pre = client.get(f"/documents/{doc_id}").json()
+    assert pre["status"] == "chunked"
+
     client.post(f"/documents/{doc_id}/index")
-    assert client.get(f"/documents/{doc_id}").json()["status"] == "indexed"
+    post = client.get(f"/documents/{doc_id}").json()
+    assert post["status"] == "indexed"
 
 
 def test_listing_embeddings_returns_provenance_only(monkeypatch):
@@ -178,9 +203,9 @@ def test_listing_embeddings_returns_provenance_only(monkeypatch):
 
     rows = client.get(f"/documents/{doc_id}/embeddings").json()
     assert rows
-    assert set(rows[0].keys()) == {
-        "chunk_id", "page_number", "chunk_index", "embedding_model", "embedding_dim",
-    }
+    keys = set(rows[0].keys())
+    assert keys == {"chunk_id", "page_number", "chunk_index", "embedding_model", "embedding_dim"}
+    assert all(r["embedding_model"] == embedding.EMBEDDING_MODEL for r in rows)
 
 
 def test_embedder_embed_texts_returns_empty_for_empty_input():

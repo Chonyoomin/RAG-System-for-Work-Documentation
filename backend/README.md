@@ -1,6 +1,6 @@
 # Backend
 
-FastAPI + SQLAlchemy + PostgreSQL/pgvector. Phase 1 covers backend bootstrap plus safe document ingestion through deterministic chunking: health endpoints, database foundation, upload, hash-based deduplication, local file storage, parsing for PDF/DOCX/TXT/MD with OCR fallback, page-level provenance, and fixed-window chunking with chunk-level provenance. Embeddings, indexing, retrieval, and answer generation are still out of scope.
+FastAPI + SQLAlchemy + PostgreSQL/pgvector. Phase 1 covers backend bootstrap plus safe document ingestion through deterministic chunking. Phase 2 adds local embedding generation and per-(chunk, model) vector persistence using LangChain's HuggingFace embeddings wrapper around `BAAI/bge-small-en-v1.5`. Retrieval, ranking, citation formatting, no-answer policy, answer generation, and frontend work are still out of scope.
 
 ## Layout
 
@@ -25,6 +25,8 @@ app/
   services/parsing.py    PDF/DOCX/TXT/MD parsing + Tesseract OCR fallback
   services/extraction.py parse -> persist pages (atomic, non-destructive on failure)
   services/chunking.py   deterministic char-window chunking over persisted pages
+  services/embedding.py  lazy LangChain HuggingFaceEmbeddings wrapper (local model)
+  services/indexing.py   embed persisted chunks -> upsert chunk_embeddings rows
   ingestion/             later phase
   retrieval/             later phase
   services/              later phase
@@ -97,9 +99,8 @@ Supporting endpoints:
 - `GET /documents/{id}/pages` returns the persisted pages in order.
 - `POST /documents/{id}/chunk` runs deterministic chunking over the persisted pages (see below) and persists chunks.
 - `GET /documents/{id}/chunks` returns the persisted chunks in `(page_number, chunk_index)` order.
-- `POST /documents/{id}/index` embeds persisted chunks with the local model and writes `chunk_embeddings` rows (see Indexing).
-- `GET /documents/{id}/index` returns indexing coverage for the document — see Indexing inspection.
-- `GET /documents/{id}/embeddings` returns provenance-only rows (`chunk_id`, `page_number`, `chunk_index`, `embedding_model`, `embedding_dim`); raw vectors are not exposed.
+- `POST /documents/{id}/index` embeds the persisted chunks with the local model and writes one `chunk_embeddings` row per chunk for that model (see Indexing).
+- `GET /documents/{id}/embeddings` returns provenance-only rows (`chunk_id`, `page_number`, `chunk_index`, `embedding_model`, `embedding_dim`) — vectors themselves are not exposed.
 
 ## Extraction
 
@@ -199,6 +200,21 @@ alembic downgrade -1
 - `0003_add_pages` creates the `pages` table used by the extraction flow (FK to `documents` with `ON DELETE CASCADE`, unique on `(document_id, page_number)`).
 - `0004_add_chunks` creates the `chunks` table used by the chunking flow (FKs to `documents` and `pages` with `ON DELETE CASCADE`, unique on `(page_id, chunk_index)`).
 - `0005_add_chunk_embeddings` creates the `chunk_embeddings` table used by Phase 2 indexing (FKs to `documents`, `pages`, `chunks` with `ON DELETE CASCADE`, unique on `(chunk_id, embedding_model)`, `embedding` column typed as pgvector `Vector(384)`). The dim `384` is hardcoded in this migration so the historical schema step is deterministic and never depends on runtime config.
+
+## Indexing
+
+Indexing is decoupled from chunking. Call `POST /documents/{id}/index` to generate embeddings for the document's persisted chunks and write them to `chunk_embeddings`.
+
+Behavior:
+
+- **Input is chunk rows, not raw uploads or pages.** The flow loads `chunks` for the document and embeds `chunk.text` directly. No re-parsing, no re-OCR, no re-chunking.
+- **Local embedding model only.** [app/services/embedding.py](app/services/embedding.py) wraps LangChain's `HuggingFaceEmbeddings` around `BAAI/bge-small-en-v1.5` (384-dim). The model loads lazily on first call so the fast test suite (which monkeypatches `embedder.embed_texts`) never pays the download cost. Running the real path the first time downloads the model into the local HuggingFace cache.
+- **Per-(chunk, model) persistence.** One `chunk_embeddings` row per chunk per `embedding_model`, keyed by the existing `(chunk_id, embedding_model)` unique constraint. Each row carries the full provenance set: `document_id`, `page_id`, `chunk_id`, `page_number`, `chunk_index`, `embedding_model`, `embedding_dim`, `embedding`.
+- **Deterministic re-index, scoped to the active model.** Re-running `/index` deletes only this `(document_id, embedding_model)` pair's existing rows and re-inserts in a single commit. Rows under a different `embedding_model` for the same chunks are left untouched. Same chunks + same model → same row count, no duplicates.
+- **Requires chunking first.** If the document hasn't been chunked, `/index` returns `409 {"error":"indexing_failed","reason":"..."}`. Unknown documents return `404`. If the embedder ever returns the wrong vector count or wrong dim for the schema, `/index` aborts before writing anything.
+- **Status transition.** A successful indexing call sets `document.status = "indexed"`. Re-running on an already-`indexed` document is allowed and remains deterministic. Status flow so far: `uploaded` → `extracted` → `chunked` → `indexed`.
+
+Retrieval, similarity search, ranking, citations, and answer generation are not part of this slice and remain Phase 3+.
 
 ### Embedding dimension
 
